@@ -4,6 +4,10 @@ body {
   color: #404C51;
 }
 
+a, button, input, label {
+  margin-right: .25em !important;
+}
+
 label {
   font-weight: bold;
 }
@@ -13,4 +17,24 @@ label {
     width: 1170px;
     margin: 0 auto;
   }
+}
+
+.col-header-data, .col-header-valor {
+  width: 120px;
+}
+
+.col-body-data {
+  text-align: center;
+}
+
+.col-body-valor {
+  text-align: right;
+}
+
+.col-header-acoes {
+  width: 100px;
+}
+
+.col-body-acoes {
+  text-align: center;
 }

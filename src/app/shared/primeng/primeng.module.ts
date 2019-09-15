@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
-
+import {TableModule} from 'primeng/table';
+import {TooltipModule} from 'primeng/primeng';
 
 
 @NgModule({
@@ -10,12 +11,16 @@ import {InputTextModule} from 'primeng/inputtext';
   imports: [
     CommonModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    TableModule,
+    TooltipModule
   ],
   exports: [
     ButtonModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    TableModule,
+    TooltipModule
   ]
 })
 export class PrimengModule { }

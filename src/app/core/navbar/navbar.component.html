@@ -1,0 +1,17 @@
+<div class="navbar">
+  <div class="container">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <a class="navbar-toggle" href="javascript:;" (click)="exibirMenu = !exibirMenu"><i class="pi pi-bars"></i></a>
+      </div>
+    </div>
+  </div>
+  <ul class="navbar-menu" [hidden]="!exibirMenu">
+    <li class="navbar-usuario">Pedro Lucas Oliveira de Matos</li>
+    <li class="navbar-menuitem"><a href="javascript:;" [routerLink]="['/lancamentos']">Lançamentos</a></li>
+    <li class="navbar-menuitem"><a href="javascript:;">Categorias</a></li>
+    <li class="navbar-menuitem"><a href="javascript:;" [routerLink]="['/pessoas']">Pessoas</a></li>
+    <li class="navbar-menuitem"><a href="javascript:;">Usuários</a></li>
+  </ul>
+</div>
+

@@ -9,6 +9,10 @@ const routes: Routes = [
     loadChildren: () => import('./lancamentos/lancamentos.module').then(module => module.LancamentosModule)
   },
   {
+    path: 'pessoas',
+    loadChildren: () => import('./pessoas/pessoas.module').then(module => module.PessoasModule)
+  },
+  {
     path: '**',
     redirectTo: 'lancamentos',
     pathMatch: 'full'
