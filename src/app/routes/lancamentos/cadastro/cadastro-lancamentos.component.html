@@ -1,1 +1,45 @@
-<p>cadastro-lancamentos works!</p>
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Novo Lançamento</h1>
+    </div>
+    <div class="ui-g-12">
+      <p-selectButton [options]="tipos"></p-selectButton>
+    </div>
+    <div class="ui-g-6 ui-md-3 ui-fluid">
+      <label for="vencimento">Vencimento</label>
+      <p-calendar id="vencimento"></p-calendar>
+    </div>
+    <div class="ui-g-6 ui-md-3 ui-fluid">
+      <label for="recebimento_pagamento">Recebimento</label>
+      <p-calendar id="recebimento_pagamento"></p-calendar>
+    </div>
+    <div class="ui-g-12 ui-md-9 ui-fluid">
+      <label for="descricao">Descrição</label>
+      <input id="descricao" pInputText type="text">
+    </div>
+    <div class="ui-g-12 ui-md-3 ui-fluid">
+      <label for="valor">Valor</label>
+      <input id="valor" pInputText currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }" type="text">
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+      <label for="categoria">Categoria</label>
+      <p-dropdown id="categoria" [options]="categorias" [autoWidth]="false" [filter]="true"
+                  placeholder="Selecione"></p-dropdown>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-fluid">
+      <label for="pessoa">Pessoa</label>
+      <p-dropdown id="pessoa" [options]="pessoas" [autoWidth]="false" [filter]="true"
+                  placeholder="Selecione"></p-dropdown>
+    </div>
+    <div class="ui-g-12 ui-fluid">
+      <label for="observacao">Observação</label>
+      <textarea id="observacao" pInputTextarea rows="3"></textarea>
+    </div>
+    <div class="ui-g-12">
+      <button pButton type="button" label="Salvar"></button>
+      <button pButton type="button" label="Limpar" class="ui-button-info"></button>
+      <a href="javascript:;" [routerLink]="'/lancamentos'">Voltar para a pesquisa</a>
+    </div>
+  </div>
+</div>

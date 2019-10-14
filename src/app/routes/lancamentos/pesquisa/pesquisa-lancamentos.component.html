@@ -35,8 +35,8 @@
           <tr>
             <td>{{lancamento.pessoa}}</td>
             <td>{{lancamento.descricao}}</td>
-            <td class="col-body-data">{{lancamento.dataVencimento}}</td>
-            <td class="col-body-data">{{lancamento.dataPagamento}}</td>
+            <td class="col-body-data">{{lancamento.dataVencimento | date:'dd/MM/yyyy'}}</td>
+            <td class="col-body-data">{{lancamento.dataPagamento | date:'dd/MM/yyyy'}}</td>
             <td class="col-body-valor" [style.color]="lancamento.tipo === 'DESPESA' ? 'red' : 'blue'">{{lancamento.valor}}</td>
             <td>
               <button pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></button>
@@ -47,7 +47,7 @@
       </p-table>
     </div>
     <div class="ui-g-12">
-      <button pButton label="Novo Lançamento"></button>
+      <button pButton label="Novo Lançamento" [routerLink]="'/lancamentos/novo'"></button>
     </div>
   </div>
 </div>
