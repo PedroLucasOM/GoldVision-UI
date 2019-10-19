@@ -1,44 +1,50 @@
 <div class="container">
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <h1>Nova Pessoa</h1>
+  <form #formPessoa="ngForm" autocomplete="off">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Nova Pessoa</h1>
+      </div>
+      <div class="ui-g-12 ui-fluid">
+        <label for="nome">Nome</label>
+        <input id="nome" name="nome" pInputText type="text" required maxlength="50" minlength="3" ngModel
+               #nome="ngModel">
+        <app-mensagem-erro [control]="nome" error="required" text="O nome é obrigatório"></app-mensagem-erro>
+        <app-mensagem-erro [control]="nome" error="minlength"
+                           text="O nome deve ter, no mínimo, {{nome.errors?.minlength?.requiredLength}}"></app-mensagem-erro>
+      </div>
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+        <label for="logradouro">Logradouro</label>
+        <input id="logradouro" name="descricao" pInputText type="text" ngModel #descricao="ngModel">
+      </div>
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label for="numero">Número</label>
+        <input id="numero" name="numero" pInputText type="text" ngModel #numero="ngModel">
+      </div>
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label for="complemento">Complemento</label>
+        <input id="complemento" name="complemento" pInputText type="text" ngModel #complemento="ngModel">
+      </div>
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label for="bairro">Bairro</label>
+        <input id="bairro" name="bairro" pInputText type="text" ngModel #bairro="ngModel">
+      </div>
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label for="cep">CEP</label>
+        <p-inputMask id="cep" name="cep" ngModel #cep="ngModel" mask="99999-999"></p-inputMask>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label for="cidade">Cidade</label>
+        <input id="cidade" name="cidade" pInputText type="text" ngModel #cidade="ngModel">
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label for="estado">Estado</label>
+        <input id="estado" name="estado" pInputText type="text" ngModel #estado="ngModel">
+      </div>
+      <div class="ui-g-12">
+        <button pButton label="Salvar" [disabled]="formPessoa.invalid"></button>
+        <button pButton class="ui-button-info" label="Limpar"></button>
+        <a href="javascript:;" [routerLink]="'/pessoas'">Voltar para a pesquisa</a>
+      </div>
     </div>
-    <div class="ui-g-12 ui-fluid">
-      <label for="nome">Nome</label>
-      <input id="nome" pInputText type="text">
-    </div>
-    <div class="ui-g-12 ui-md-9 ui-fluid">
-      <label for="logradouro">Logradouro</label>
-      <input id="logradouro" pInputText type="text">
-    </div>
-    <div class="ui-g-12 ui-md-3 ui-fluid">
-      <label for="numero">Número</label>
-      <input id="numero" pInputText type="text">
-    </div>
-    <div class="ui-g-12 ui-md-4 ui-fluid">
-      <label for="complemento">Complemento</label>
-      <input id="complemento" pInputText type="text">
-    </div>
-    <div class="ui-g-12 ui-md-4 ui-fluid">
-      <label for="bairro">Bairro</label>
-      <input id="bairro" pInputText type="text">
-    </div>
-    <div class="ui-g-12 ui-md-4 ui-fluid">
-      <label for="cep">CEP</label>
-      <p-inputMask id="cep" mask="99999-999"></p-inputMask>
-    </div>
-    <div class="ui-g-12 ui-md-6 ui-fluid">
-      <label for="cidade">Cidade</label>
-      <input id="cidade" pInputText type="text">
-    </div>
-    <div class="ui-g-12 ui-md-6 ui-fluid">
-      <label for="estado">Estado</label>
-      <input id="estado" pInputText type="text">
-    </div>
-    <div class="ui-g-12">
-      <button pButton label="Salvar"></button>
-      <button pButton class="ui-button-info" label="Limpar"></button>
-      <a href="javascript:;" [routerLink]="'/pessoas'">Voltar para a pesquisa</a>
-    </div>
-  </div>
+  </form>
 </div>

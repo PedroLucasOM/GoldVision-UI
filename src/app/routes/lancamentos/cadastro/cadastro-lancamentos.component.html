@@ -1,45 +1,62 @@
 <div class="container">
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <h1>Novo Lançamento</h1>
+  <form #formLancaemento="ngForm" autocomplete="off">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Novo Lançamento</h1>
+      </div>
+      <div class="ui-g-12">
+        <p-selectButton name="tipo" required [options]="tipos" ngModel #tipo="ngModel"></p-selectButton>
+        <app-mensagem-erro [control]="tipo" error="required" text="O tipo é obrigatório"></app-mensagem-erro>
+      </div>
+      <div class="ui-g-6 ui-md-3 ui-fluid">
+        <label for="vencimento">Vencimento</label>
+        <p-calendar id="vencimento" name="dataVencimento" required ngModel #dataVencimento="ngModel"></p-calendar>
+        <app-mensagem-erro [control]="dataVencimento" error="required"
+                           text="A data de vencimento é obrigatória"></app-mensagem-erro>
+      </div>
+      <div class="ui-g-6 ui-md-3 ui-fluid">
+        <label for="recebimento_pagamento">Recebimento</label>
+        <p-calendar id="recebimento_pagamento" name="dataPagamento" ngModel
+                    #dataPagamento="ngModel"></p-calendar>
+      </div>
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+        <label for="descricao">Descrição</label>
+        <input id="descricao" name="descricao" required maxlength="30" pInputText type="text" ngModel
+               #descricao="ngModel">
+        <app-mensagem-erro [control]="descricao" error="required"
+                           text="A descrição é obrigatória"></app-mensagem-erro>
+      </div>
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label for="valor">Valor</label>
+        <input id="valor" name="valor" required pInputText currencyMask
+               [options]="{ prefix: '', thousands: '.', decimal: ',' }" type="text" ngModel #valor="ngModel">
+        <app-mensagem-erro [control]="valor" error="required"
+                           text="O valor é obrigatório"></app-mensagem-erro>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label for="categoria">Categoria</label>
+        <p-dropdown id="categoria" name="categoria" required [options]="categorias" [autoWidth]="false" [filter]="true"
+                    placeholder="Selecione" ngModel #categoria="ngModel"></p-dropdown>
+        <app-mensagem-erro [control]="categoria" error="required"
+                           text="A categoria é obrigatória"></app-mensagem-erro>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label for="pessoa">Pessoa</label>
+        <p-dropdown id="pessoa" name="pessoa" required [options]="pessoas" [autoWidth]="false" [filter]="true"
+                    placeholder="Selecione" ngModel #pessoa="ngModel"></p-dropdown>
+        <app-mensagem-erro [control]="pessoa" error="required"
+                           text="A pessoa é obrigatória"></app-mensagem-erro>
+      </div>
+      <div class="ui-g-12 ui-fluid">
+        <label for="observacao">Observação</label>
+        <textarea id="observacao" name="observacao" maxlength="100" pInputTextarea rows="3" ngModel
+                  #observacao="ngModel"></textarea>
+      </div>
+      <div class="ui-g-12">
+        <button pButton type="button" label="Salvar" [disabled]="formLancaemento.invalid"></button>
+        <button pButton type="button" label="Limpar" class="ui-button-info"></button>
+        <a href="javascript:;" [routerLink]="'/lancamentos'">Voltar para a pesquisa</a>
+      </div>
     </div>
-    <div class="ui-g-12">
-      <p-selectButton [options]="tipos"></p-selectButton>
-    </div>
-    <div class="ui-g-6 ui-md-3 ui-fluid">
-      <label for="vencimento">Vencimento</label>
-      <p-calendar id="vencimento"></p-calendar>
-    </div>
-    <div class="ui-g-6 ui-md-3 ui-fluid">
-      <label for="recebimento_pagamento">Recebimento</label>
-      <p-calendar id="recebimento_pagamento"></p-calendar>
-    </div>
-    <div class="ui-g-12 ui-md-9 ui-fluid">
-      <label for="descricao">Descrição</label>
-      <input id="descricao" pInputText type="text">
-    </div>
-    <div class="ui-g-12 ui-md-3 ui-fluid">
-      <label for="valor">Valor</label>
-      <input id="valor" pInputText currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }" type="text">
-    </div>
-    <div class="ui-g-12 ui-md-6 ui-fluid">
-      <label for="categoria">Categoria</label>
-      <p-dropdown id="categoria" [options]="categorias" [autoWidth]="false" [filter]="true"
-                  placeholder="Selecione"></p-dropdown>
-    </div>
-    <div class="ui-g-12 ui-md-6 ui-fluid">
-      <label for="pessoa">Pessoa</label>
-      <p-dropdown id="pessoa" [options]="pessoas" [autoWidth]="false" [filter]="true"
-                  placeholder="Selecione"></p-dropdown>
-    </div>
-    <div class="ui-g-12 ui-fluid">
-      <label for="observacao">Observação</label>
-      <textarea id="observacao" pInputTextarea rows="3"></textarea>
-    </div>
-    <div class="ui-g-12">
-      <button pButton type="button" label="Salvar"></button>
-      <button pButton type="button" label="Limpar" class="ui-button-info"></button>
-      <a href="javascript:;" [routerLink]="'/lancamentos'">Voltar para a pesquisa</a>
-    </div>
-  </div>
+  </form>
 </div>

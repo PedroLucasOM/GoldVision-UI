@@ -4,6 +4,8 @@ import { PessoasRoutingModule } from './pessoas-routing.module';
 import {CadastroPessoasComponent} from './cadastro/cadastro-pessoas.component';
 import {PesquisaPessoasComponent} from './pesquisa/pesquisa-pessoas.component';
 import {SharedModule} from '../../shared/shared.module';
+import {FormsModule} from '@angular/forms';
+import {ComponentesModule} from '../../core/componentes/componentes.module';
 
 
 
@@ -11,8 +13,10 @@ import {SharedModule} from '../../shared/shared.module';
   declarations: [CadastroPessoasComponent, PesquisaPessoasComponent],
   imports: [
     CommonModule,
+    FormsModule,
     PessoasRoutingModule,
-    SharedModule
+    SharedModule,
+    ComponentesModule
   ]
 })
 export class PessoasModule { }

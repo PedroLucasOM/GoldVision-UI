@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import {RouterModule} from '@angular/router';
+import { MensagemErroComponent } from './componentes/mensagem-erro/mensagem-erro.component';
+import {ComponentesModule} from './componentes/componentes.module';
 
 
 
@@ -9,10 +11,12 @@ import {RouterModule} from '@angular/router';
   declarations: [NavbarComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ComponentesModule
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
+    ComponentesModule
   ]
 })
 export class CoreModule { }

@@ -4,13 +4,17 @@ import {CadastroLancamentosComponent} from './cadastro/cadastro-lancamentos.comp
 import {PesquisaLancamentosComponent} from './pesquisa/pesquisa-lancamentos.component';
 import { LancamentosRoutingModule } from './lancamentos-routing.module';
 import {SharedModule} from '../../shared/shared.module';
+import {FormsModule} from '@angular/forms';
+import {ComponentesModule} from '../../core/componentes/componentes.module';
 
 @NgModule({
   declarations: [CadastroLancamentosComponent, PesquisaLancamentosComponent],
   imports: [
     CommonModule,
+    FormsModule,
     LancamentosRoutingModule,
-    SharedModule
+    SharedModule,
+    ComponentesModule
   ]
 })
 export class LancamentosModule { }
