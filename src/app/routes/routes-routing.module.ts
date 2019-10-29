@@ -1,16 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {RoutesModule} from './routes.module';
 
 const routes: Routes = [
   {
     path: 'lancamentos',
-    loadChildren: () => import('./lancamentos/lancamentos.module').then(module => module.LancamentosModule)
+    loadChildren: './lancamentos/lancamentos.module#LancamentosModule'
   },
   {
     path: 'pessoas',
-    loadChildren: () => import('./pessoas/pessoas.module').then(module => module.PessoasModule)
+    loadChildren: './pessoas/pessoas.module#PessoasModule'
   },
   {
     path: '**',

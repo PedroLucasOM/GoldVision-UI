@@ -1,21 +1,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {PesquisaPessoasComponent} from './pesquisa/pesquisa-pessoas.component';
-import {CadastroPessoasComponent} from './cadastro/cadastro-pessoas.component';
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: PesquisaPessoasComponent
-  },
-  {
-    path: 'novo',
-    component: CadastroPessoasComponent
-  },
-  {
-    path: 'editar/:uuid',
-    component: CadastroPessoasComponent
+    component: LoginComponent
   },
   {
     path: '**',
@@ -32,4 +23,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class PessoasRoutingModule { }
+export class SecurityRoutingModule {
+}
