@@ -8,7 +8,11 @@ import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import {AuthService} from '../security/auth.service';
 import {MessageService} from 'primeng/api';
 import {SharedModule} from '../shared/shared.module';
+import {environment} from '../../environments/environment';
 
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -19,9 +23,9 @@ import {SharedModule} from '../shared/shared.module';
     HttpClientModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return '';
-        }
+        tokenGetter,
+        whitelistedDomains: [environment.whitelistedDomains],
+        blacklistedRoutes: [environment.blacklistedDomains]
       }
     }),
     SharedModule

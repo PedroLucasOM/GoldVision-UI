@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  ApiURL: 'http://localhost:8080'
+  ApiURL: 'http://localhost:8080',
+  whitelistedDomains: 'http://localhost:8080',
+  blacklistedDomains: 'http://localhost:8080/oauth/token'
 };
 
 /*
