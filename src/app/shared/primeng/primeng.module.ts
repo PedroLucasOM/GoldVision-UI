@@ -5,6 +5,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {TableModule} from 'primeng/table';
 import {CalendarModule, DropdownModule, InputMaskModule, InputTextareaModule, SelectButtonModule, TooltipModule} from 'primeng/primeng';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
+import {ToastModule} from 'primeng/toast';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {CurrencyMaskModule} from 'ng2-currency-mask';
     DropdownModule,
     InputTextareaModule,
     CurrencyMaskModule,
-    InputMaskModule
+    InputMaskModule,
+    ToastModule
   ],
   exports: [
     ButtonModule,
@@ -33,7 +35,8 @@ import {CurrencyMaskModule} from 'ng2-currency-mask';
     DropdownModule,
     InputTextareaModule,
     CurrencyMaskModule,
-    InputMaskModule
+    InputMaskModule,
+    ToastModule
   ]
 })
 export class PrimengModule { }

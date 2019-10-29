@@ -1,5 +1,5 @@
 <div class="container" style="max-width: 400px; margin: auto">
-  <form autocomplete="off" #loginForm="ngForm" (ngSubmit)="login(loginForm); submitted=true">
+  <form autocomplete="off" #loginForm="ngForm" (ngSubmit)="login(loginForm); submitted=true;password.reset()">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Login</h1>

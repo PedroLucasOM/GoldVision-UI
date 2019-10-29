@@ -6,6 +6,8 @@ import {ComponentesModule} from './componentes/componentes.module';
 import {HttpClientModule} from '@angular/common/http';
 import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import {AuthService} from '../security/auth.service';
+import {MessageService} from 'primeng/api';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -21,13 +23,15 @@ import {AuthService} from '../security/auth.service';
           return '';
         }
       }
-    })
+    }),
+    SharedModule
   ],
   exports: [
     NavbarComponent,
     ComponentesModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
-  providers: [JwtHelperService, AuthService]
+  providers: [JwtHelperService, AuthService, MessageService]
 })
 export class CoreModule { }

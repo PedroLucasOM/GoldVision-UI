@@ -1,2 +1,5 @@
-<app-navbar *ngIf="showNavbar()"></app-navbar>
+<p-toast [style]="{marginTop: '5px'}"></p-toast>
+<div *ngIf="showNavbar()">
+  <app-navbar></app-navbar>
+</div>
 <router-outlet></router-outlet>
