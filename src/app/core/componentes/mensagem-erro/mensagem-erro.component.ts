@@ -12,7 +12,8 @@ export class MensagemErroComponent {
   @Input() error: string;
   @Input() text: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   temErro() {
     return this.control.hasError(this.error) && this.control.dirty;

@@ -4,15 +4,11 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import {ComponentesModule} from './componentes/componentes.module';
 import {HttpClientModule} from '@angular/common/http';
-import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import {AuthService} from '../security/auth.service';
 import {MessageService} from 'primeng/api';
 import {SharedModule} from '../shared/shared.module';
-import {environment} from '../../environments/environment';
-
-export function tokenGetter() {
-  return localStorage.getItem('token');
-}
+import {LancamentosService} from '../routes/lancamentos/lancamentos.service';
+import {HandleErrorService} from './services/handle-error.service';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -20,22 +16,21 @@ export function tokenGetter() {
     CommonModule,
     RouterModule,
     ComponentesModule,
-    HttpClientModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter,
-        whitelistedDomains: [environment.whitelistedDomains],
-        blacklistedRoutes: [environment.blacklistedDomains]
-      }
-    }),
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   exports: [
     NavbarComponent,
     ComponentesModule,
-    HttpClientModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
-  providers: [JwtHelperService, AuthService, MessageService]
+  providers: [
+    MessageService,
+    AuthService,
+    HandleErrorService,
+    LancamentosService
+  ]
 })
-export class CoreModule { }
+export class CoreModule {
+}

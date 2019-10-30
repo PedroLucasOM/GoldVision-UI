@@ -1,11 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {LoginComponent} from './security/login/login.component';
 
 
 const routes: Routes = [
   {
     path: 'login',
-    loadChildren: './security/security.module#SecurityModule'
+    component: LoginComponent
   },
   {
     path: '',
@@ -22,4 +23,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

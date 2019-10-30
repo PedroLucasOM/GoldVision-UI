@@ -1,23 +1,23 @@
 <div class="container" style="max-width: 400px; margin: auto">
-  <form autocomplete="off" #loginForm="ngForm" (ngSubmit)="login(loginForm); submitted=true;password.reset()">
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm); submitted=true;password.reset()" autocomplete="off">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Login</h1>
       </div>
       <div class="ui-g-12 ui-fluid">
-        <input type="email" ngModel email name="email" required pInputText placeholder="E-mail" #email="ngModel">
+        <input #email="ngModel" email name="email" ngModel pInputText placeholder="E-mail" required type="email">
         <app-mensagem-erro [control]="email" error="required"
                            text="O e-mail é obrigatório"></app-mensagem-erro>
         <app-mensagem-erro *ngIf="submitted" [control]="email" error="email"
                            text="Digite um endereço de e-mail válido"></app-mensagem-erro>
       </div>
       <div class="ui-g-12 ui-fluid">
-        <input type="password" ngModel name="senha" required pInputText placeholder="Senha" #password="ngModel">
+        <input #password="ngModel" name="senha" ngModel pInputText placeholder="Senha" required type="password">
         <app-mensagem-erro [control]="password" error="required"
                            text="A senha é obrigatória"></app-mensagem-erro>
       </div>
       <div class="ui-g-12 ui-fluid">
-        <button type="submit" pButton label="Login" [disabled]="loginForm.invalid" #submitButton></button>
+        <button #submitButton [disabled]="loginForm.invalid" label="Login" pButton type="submit"></button>
       </div>
     </div>
   </form>

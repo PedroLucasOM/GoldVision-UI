@@ -5,15 +5,15 @@
     </div>
     <div class="ui-g-12 ui-fluid">
       <label for="nome">Nome</label>
-      <input pInputText type="text" id="nome">
+      <input id="nome" pInputText type="text">
     </div>
     <div class="ui-g-12">
-      <button pButton label="Pesquisar"></button>
+      <button label="Pesquisar" pButton></button>
     </div>
   </div>
   <div class="ui-g">
     <div class="ui-g-12">
-      <p-table [value]="pessoas" [paginator]="true" [rows]="4" [responsive]="true">
+      <p-table [paginator]="true" [responsive]="true" [rows]="4" [value]="pessoas">
         <ng-template pTemplate="header">
           <tr>
             <th>Nome</th>
@@ -23,22 +23,23 @@
             <th class="col-header-acoes"></th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-pessoa>
+        <ng-template let-pessoa pTemplate="body">
           <tr>
             <td>{{pessoa.nome}}</td>
             <td>{{pessoa.cidade}}</td>
             <td>{{pessoa.estado}}</td>
-            <td><a href="javascript:;" pTooltip="{{pessoa.ativo ? 'Ativar' : 'Desativar'}}" tooltipPosition="top">{{pessoa.ativo ? 'Ativo' : 'Inativo'}}</a></td>
+            <td><a href="javascript:;" pTooltip="{{pessoa.ativo ? 'Ativar' : 'Desativar'}}"
+                   tooltipPosition="top">{{pessoa.ativo ? 'Ativo' : 'Inativo'}}</a></td>
             <td class="col-body-acoes">
-              <button pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></button>
-              <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+              <button icon="pi pi-pencil" pButton pTooltip="Editar" tooltipPosition="top"></button>
+              <button icon="pi pi-trash" pButton pTooltip="Excluir" tooltipPosition="top"></button>
             </td>
           </tr>
         </ng-template>
       </p-table>
     </div>
     <div class="ui-g-12">
-      <button pButton label="Nova Pessoa" [routerLink]="'/pessoas/novo'"></button>
+      <button [routerLink]="'/pessoas/novo'" label="Nova Pessoa" pButton></button>
     </div>
   </div>
 </div>

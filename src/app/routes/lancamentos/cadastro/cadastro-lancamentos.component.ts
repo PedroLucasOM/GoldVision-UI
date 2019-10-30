@@ -15,7 +15,8 @@ export class CadastroLancamentosComponent implements OnInit {
   categorias: SelectItem[];
   pessoas: SelectItem[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

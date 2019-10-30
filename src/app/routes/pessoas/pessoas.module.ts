@@ -18,4 +18,5 @@ import {ComponentesModule} from '../../core/componentes/componentes.module';
     ComponentesModule
   ]
 })
-export class PessoasModule { }
+export class PessoasModule {
+}

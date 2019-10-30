@@ -6,44 +6,44 @@
       </div>
       <div class="ui-g-12 ui-fluid">
         <label for="nome">Nome</label>
-        <input id="nome" name="nome" pInputText type="text" required maxlength="50" minlength="3" ngModel
-               #nome="ngModel">
+        <input #nome="ngModel" id="nome" maxlength="50" minlength="3" name="nome" ngModel pInputText required
+               type="text">
         <app-mensagem-erro [control]="nome" error="required" text="O nome é obrigatório"></app-mensagem-erro>
         <app-mensagem-erro [control]="nome" error="minlength"
                            text="O nome deve ter, no mínimo, {{nome.errors?.minlength?.requiredLength}}"></app-mensagem-erro>
       </div>
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label for="logradouro">Logradouro</label>
-        <input id="logradouro" name="descricao" pInputText type="text" ngModel #descricao="ngModel">
+        <input #descricao="ngModel" id="logradouro" name="descricao" ngModel pInputText type="text">
       </div>
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label for="numero">Número</label>
-        <input id="numero" name="numero" pInputText type="text" ngModel #numero="ngModel">
+        <input #numero="ngModel" id="numero" name="numero" ngModel pInputText type="text">
       </div>
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label for="complemento">Complemento</label>
-        <input id="complemento" name="complemento" pInputText type="text" ngModel #complemento="ngModel">
+        <input #complemento="ngModel" id="complemento" name="complemento" ngModel pInputText type="text">
       </div>
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label for="bairro">Bairro</label>
-        <input id="bairro" name="bairro" pInputText type="text" ngModel #bairro="ngModel">
+        <input #bairro="ngModel" id="bairro" name="bairro" ngModel pInputText type="text">
       </div>
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label for="cep">CEP</label>
-        <p-inputMask id="cep" name="cep" ngModel #cep="ngModel" mask="99999-999"></p-inputMask>
+        <p-inputMask #cep="ngModel" id="cep" mask="99999-999" name="cep" ngModel></p-inputMask>
       </div>
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label for="cidade">Cidade</label>
-        <input id="cidade" name="cidade" pInputText type="text" ngModel #cidade="ngModel">
+        <input #cidade="ngModel" id="cidade" name="cidade" ngModel pInputText type="text">
       </div>
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label for="estado">Estado</label>
-        <input id="estado" name="estado" pInputText type="text" ngModel #estado="ngModel">
+        <input #estado="ngModel" id="estado" name="estado" ngModel pInputText type="text">
       </div>
       <div class="ui-g-12">
-        <button pButton label="Salvar" [disabled]="formPessoa.invalid"></button>
-        <button pButton class="ui-button-info" label="Limpar"></button>
-        <a href="javascript:;" [routerLink]="'/pessoas'">Voltar para a pesquisa</a>
+        <button [disabled]="formPessoa.invalid" label="Salvar" pButton></button>
+        <button class="ui-button-info" label="Limpar" pButton></button>
+        <a [routerLink]="'/pessoas'" href="javascript:;">Voltar para a pesquisa</a>
       </div>
     </div>
   </form>

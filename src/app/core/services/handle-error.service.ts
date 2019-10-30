@@ -2,14 +2,18 @@ import {Injectable} from '@angular/core';
 import {MessageService} from 'primeng/api';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
-import {NotAuthenticatedError} from '../../security/auth.service';
+
+export class NotAuthenticatedError {
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class HandleErrorService {
 
-  constructor(private messageService: MessageService, private router: Router) {
+  constructor(
+    private messageService: MessageService,
+    private router: Router) {
   }
 
   handle(errorResponse: any) {
@@ -36,7 +40,8 @@ export class HandleErrorService {
 
       try {
         msg = errorResponse.error[0].mensagemUsuario;
-      } catch (e) { }
+      } catch (e) {
+      }
 
       console.error('Ocorreu um erro', errorResponse);
 

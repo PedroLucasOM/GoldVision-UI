@@ -9,18 +9,18 @@
     </div>
     <div class="ui-g-12">
       <label style="display: block">Vencimento</label>
-      <input pInputText type="text" class="input-vencimento">
+      <input class="input-vencimento" pInputText type="text">
 
       <label>até</label>
-      <input pInputText type="text" class="input-vencimento">
+      <input class="input-vencimento" pInputText type="text">
     </div>
     <div class="ui-g-12">
-      <button pButton type="submit" label="Pesquisar"></button>
+      <button label="Pesquisar" pButton type="submit"></button>
     </div>
   </div>
   <div class="ui-g">
     <div class="ui-g-12">
-      <p-table [value]="lancamentos" [paginator]="true" [rows]="4" [responsive]="true">
+      <p-table [paginator]="true" [responsive]="true" [rows]="4" [value]="lancamentos">
         <ng-template pTemplate="header">
           <tr>
             <th>Pessoa</th>
@@ -31,23 +31,24 @@
             <th class="col-header-acoes"></th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-lancamento>
+        <ng-template let-lancamento pTemplate="body">
           <tr>
             <td>{{lancamento.pessoa}}</td>
             <td>{{lancamento.descricao}}</td>
             <td class="col-body-data">{{lancamento.dataVencimento | date:'dd/MM/yyyy'}}</td>
             <td class="col-body-data">{{lancamento.dataPagamento | date:'dd/MM/yyyy'}}</td>
-            <td class="col-body-valor" [style.color]="lancamento.tipo === 'DESPESA' ? 'red' : 'blue'">{{lancamento.valor}}</td>
+            <td [style.color]="lancamento.tipo === 'DESPESA' ? 'red' : 'blue'"
+                class="col-body-valor">{{lancamento.valor}}</td>
             <td>
-              <button pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></button>
-              <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+              <button icon="pi pi-pencil" pButton pTooltip="Editar" tooltipPosition="top"></button>
+              <button icon="pi pi-trash" pButton pTooltip="Excluir" tooltipPosition="top"></button>
             </td>
           </tr>
         </ng-template>
       </p-table>
     </div>
     <div class="ui-g-12">
-      <button pButton label="Novo Lançamento" [routerLink]="'/lancamentos/novo'"></button>
+      <button [routerLink]="'/lancamentos/novo'" label="Novo Lançamento" pButton></button>
     </div>
   </div>
 </div>

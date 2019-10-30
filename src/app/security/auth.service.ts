@@ -5,9 +5,6 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {HandleErrorService} from '../core/services/handle-error.service';
 import {Router} from '@angular/router';
 
-export class NotAuthenticatedError {
-}
-
 @Injectable({
   providedIn: 'root'
 })

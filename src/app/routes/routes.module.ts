@@ -10,4 +10,5 @@ import {RoutesRoutingModule} from './routes-routing.module';
     RoutesRoutingModule
   ]
 })
-export class RoutesModule { }
+export class RoutesModule {
+}

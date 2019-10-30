@@ -13,4 +13,5 @@ import {PrimengModule} from './primeng/primeng.module';
     PrimengModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

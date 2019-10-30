@@ -39,4 +39,5 @@ import {ToastModule} from 'primeng/toast';
     ToastModule
   ]
 })
-export class PrimengModule { }
+export class PrimengModule {
+}

@@ -1,4 +1,3 @@
-
 export class Endereco {
   public logradouro: string;
   public numero: string;

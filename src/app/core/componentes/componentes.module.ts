@@ -16,4 +16,5 @@ import {MessageModule} from 'primeng/message';
     MensagemErroComponent
   ]
 })
-export class ComponentesModule { }
+export class ComponentesModule {
+}

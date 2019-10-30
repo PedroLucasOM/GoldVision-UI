@@ -19,6 +19,7 @@ export class PesquisaLancamentosComponent implements OnInit {
   resumir() {
     this.service.resumir().then(data => {
       this.lancamentos = data;
+      console.log(data);
     }).catch(error => {
       console.log(error);
     });

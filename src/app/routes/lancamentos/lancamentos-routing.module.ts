@@ -34,4 +34,5 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class LancamentosRoutingModule { }
+export class LancamentosRoutingModule {
+}
