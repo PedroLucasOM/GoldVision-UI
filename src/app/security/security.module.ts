@@ -7,6 +7,8 @@ import {ComponentesModule} from '../core/componentes/componentes.module';
 import {SharedModule} from '../shared/shared.module';
 import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import {environment} from '../../environments/environment';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {GoldVisionHttpInterceptor} from './goldvision-http-interceptor';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -19,7 +21,7 @@ import {environment} from '../../environments/environment';
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
-          return localStorage.getItem('token');
+          return localStorage.getItem('accessToken');
         },
         whitelistedDomains: environment.tokenWhitelistedDomains,
         blacklistedRoutes: environment.tokenBlacklistedDomains
@@ -27,7 +29,14 @@ import {environment} from '../../environments/environment';
     })
   ],
   exports: [],
-  providers: [JwtHelperService]
+  providers: [
+    JwtHelperService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GoldVisionHttpInterceptor,
+      multi: true
+    }
+  ]
 })
 export class SecurityModule {
 }
