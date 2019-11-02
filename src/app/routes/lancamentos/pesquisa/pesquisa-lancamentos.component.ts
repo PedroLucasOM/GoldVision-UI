@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LancamentosService} from '../lancamentos.service';
+import {AuthService} from '../../../security/auth.service';
 
 @Component({
   selector: 'app-pesquisa-lancamentos',
@@ -9,7 +10,10 @@ import {LancamentosService} from '../lancamentos.service';
 export class PesquisaLancamentosComponent implements OnInit {
   lancamentos;
 
-  constructor(private service: LancamentosService) {
+  constructor(
+    private service: LancamentosService,
+    private auth: AuthService
+  ) {
   }
 
   ngOnInit() {

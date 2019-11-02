@@ -31,15 +31,18 @@
             <td><a href="javascript:;" pTooltip="{{pessoa.ativo ? 'Ativar' : 'Desativar'}}"
                    tooltipPosition="top">{{pessoa.ativo ? 'Ativo' : 'Inativo'}}</a></td>
             <td class="col-body-acoes">
-              <button icon="pi pi-pencil" pButton pTooltip="Editar" tooltipPosition="top"></button>
-              <button icon="pi pi-trash" pButton pTooltip="Excluir" tooltipPosition="top"></button>
+              <button icon="pi pi-pencil" pButton pTooltip="Editar" tooltipPosition="top"
+                      [disabled]="!auth.hasAuthority('ATUALIZAR_PESSOA')"></button>
+              <button icon="pi pi-trash" pButton pTooltip="Excluir" tooltipPosition="top"
+                      [disabled]="!auth.hasAuthority('DELETAR_PESSOA')"></button>
             </td>
           </tr>
         </ng-template>
       </p-table>
     </div>
     <div class="ui-g-12">
-      <button [routerLink]="'/pessoas/novo'" label="Nova Pessoa" pButton></button>
+      <button [routerLink]="'/pessoas/novo'" label="Nova Pessoa" pButton
+              [disabled]="!auth.hasAuthority('SALVAR_PESSOA')"></button>
     </div>
   </div>
 </div>

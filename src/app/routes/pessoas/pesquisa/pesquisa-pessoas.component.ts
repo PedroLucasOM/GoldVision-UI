@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../../security/auth.service';
 
 @Component({
   selector: 'app-pesquisa-pessoas',
@@ -15,7 +16,9 @@ export class PesquisaPessoasComponent implements OnInit {
     {nome: 'Paula Maria', cidade: 'Uberlândia', estado: 'MG', ativo: true}
   ];
 
-  constructor() {
+  constructor(
+    private auth: AuthService
+  ) {
   }
 
   ngOnInit() {
