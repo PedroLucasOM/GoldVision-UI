@@ -12,6 +12,7 @@ import {Token} from '../core/models/Token';
 export class AuthService {
 
   static url = `${environment.ApiURL}/oauth/token`;
+  static revokeUrl = `${environment.ApiURL}/tokens/revoke`;
   token: Token;
 
   constructor(
@@ -35,12 +36,6 @@ export class AuthService {
         this.handleError.handle(response);
         return Promise.reject(response);
       });
-  }
-
-  logout() {
-    localStorage.removeItem('accessToken');
-    this.token = new Token();
-    this.router.navigate(['/login']);
   }
 
   newAccessToken(): Promise<any> {
@@ -90,4 +85,14 @@ export class AuthService {
       this.storeToken(accessToken);
     }
   }
+
+  logout() {
+    this.http.delete(AuthService.revokeUrl).toPromise()
+      .then(() => {
+        localStorage.removeItem('accessToken');
+        this.token = new Token();
+        this.router.navigate(['/login']);
+      }).catch(error => this.handleError.handle(error));
+  }
+
 }
