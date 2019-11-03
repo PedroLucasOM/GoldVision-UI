@@ -17,3 +17,12 @@ export class Lancamento {
   public categoria: Categoria;
   public pessoa: Pessoa;
 }
+
+export class LancamentoFilter {
+  descricao: string;
+  dataVencimentoDe: Date;
+  dataVencimentoAte: Date;
+  itensPorPagina = 5;
+  pagina = 0;
+  total: number;
+}

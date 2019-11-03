@@ -5,22 +5,33 @@
     </div>
     <div class="ui-g-12 ui-fluid">
       <label for="descricao">Descrição</label>
-      <input id="descricao" pInputText type="text">
+      <input id="descricao" pInputText type="text" [(ngModel)]="lancamentoFilter.descricao">
     </div>
     <div class="ui-g-12">
       <label style="display: block">Vencimento</label>
-      <input class="input-vencimento" pInputText type="text">
+      <p-calendar name="dataVencimentoDe" dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
+                  [(ngModel)]="lancamentoFilter.dataVencimentoDe" [readonlyInput]="true"></p-calendar>
 
       <label>até</label>
-      <input class="input-vencimento" pInputText type="text">
+      <p-calendar name="dataVencimentoAte" dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
+                  [(ngModel)]="lancamentoFilter.dataVencimentoAte" [readonlyInput]="true"></p-calendar>
     </div>
     <div class="ui-g-12">
-      <button label="Pesquisar" pButton type="submit"></button>
+      <button label="Pesquisar" pButton type="submit" (click)="resumir()"></button>
     </div>
   </div>
   <div class="ui-g">
     <div class="ui-g-12">
-      <p-table [paginator]="true" [responsive]="true" [rows]="4" [value]="lancamentos">
+      <p-table [paginator]="true"
+               [responsive]="true"
+               [rows]="lancamentoFilter.itensPorPagina"
+               [lazy]="true"
+               [totalRecords]="lancamentoFilter.total"
+               (onLazyLoad)="changePage($event)"
+               [value]="lancamentos">
+        <ng-template pTemplate="emptymessage">
+          Nenhum lançamento encontrado
+        </ng-template>
         <ng-template pTemplate="header">
           <tr>
             <th>Pessoa</th>
