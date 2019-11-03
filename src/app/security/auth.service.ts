@@ -69,6 +69,16 @@ export class AuthService {
     return this.token && this.token.authorities.includes(authority);
   }
 
+  hasAnyAuthority(authorities: string[]) {
+    let hasAuthority = false;
+    authorities.forEach(authority => {
+      if (this.hasAuthority(authority)) {
+        hasAuthority = true;
+      }
+    });
+    return hasAuthority;
+  }
+
   storeToken(accessToken) {
     this.token = this.jwtHelper.decodeToken(accessToken) as Token;
     localStorage.setItem('accessToken', accessToken);

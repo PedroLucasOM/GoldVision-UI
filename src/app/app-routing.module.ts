@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './security/login/login.component';
+import {NaoAutorizadoComponent} from './core/componentes/nao-autorizado/nao-autorizado.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: './routes/routes.module#RoutesModule'
+  },
+  {
+    path: 'nao-autorizado',
+    component: NaoAutorizadoComponent
   },
   {
     path: '**',

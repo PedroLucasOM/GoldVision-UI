@@ -3,9 +3,6 @@ import {MessageService} from 'primeng/api';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
 
-export class NotAuthenticatedError {
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -22,10 +19,6 @@ export class HandleErrorService {
     if (typeof errorResponse === 'string') {
       msg = errorResponse;
 
-    } else if (errorResponse instanceof NotAuthenticatedError) {
-      msg = 'Sua sessão expirou!';
-      this.router.navigate(['/login']);
-
     } else if (errorResponse instanceof HttpErrorResponse
       && errorResponse.status >= 400 && errorResponse.status <= 499) {
       msg = 'Ocorreu um erro ao processar a sua solicitação';
@@ -34,8 +27,13 @@ export class HandleErrorService {
         msg = 'Você não tem permissão para executar esta ação';
       }
 
-      if (errorResponse.error && errorResponse.error.error === 'invalid_grant') {
-        msg = 'Endereço de e-mail ou senha incorretos';
+      if (errorResponse.error) {
+        if (errorResponse.error.error === 'invalid_grant') {
+          msg = 'Endereço de e-mail ou senha incorretos';
+        } else if (errorResponse.error.error === 'invalid_token') {
+          msg = 'Sua sessão expirou!';
+          this.router.navigate(['/login']);
+        }
       }
 
       try {

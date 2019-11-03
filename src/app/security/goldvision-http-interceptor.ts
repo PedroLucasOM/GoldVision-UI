@@ -3,12 +3,12 @@ import {Injectable} from '@angular/core';
 import {from, Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 import {mergeMap} from 'rxjs/operators';
+import {HandleErrorService} from '../core/services/handle-error.service';
 
 @Injectable()
 export class GoldVisionHttpInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService) {
-  }
+  constructor(private authService: AuthService) {}
 
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
