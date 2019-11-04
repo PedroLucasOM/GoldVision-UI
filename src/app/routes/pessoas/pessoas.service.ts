@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
-import {PessoaFilter} from '../../core/models/Pessoa';
+import {Pessoa, PessoaFilter} from '../../core/models/Pessoa';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({
@@ -24,5 +24,10 @@ export class PessoasService {
     }
 
     return this.http.get(PessoasService.url, {params}).toPromise();
+  }
+
+  deletar(pessoa: Pessoa) {
+    return this.http.delete(`${PessoasService.url}/${pessoa.codigo}`)
+      .toPromise();
   }
 }

@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../../security/auth.service';
 import {Pessoa, PessoaFilter} from '../../../core/models/Pessoa';
 import {PessoasService} from '../pessoas.service';
 import {HandleErrorService} from '../../../core/services/handle-error.service';
+import {Table} from 'primeng/table';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-pesquisa-pessoas',
@@ -13,10 +15,13 @@ export class PesquisaPessoasComponent implements OnInit {
   pessoas: Pessoa[];
   pessoaFilter: PessoaFilter = new PessoaFilter();
 
+  @ViewChild('table', {static: true}) table: Table;
+
   constructor(
     private auth: AuthService,
     private pessoaService: PessoasService,
-    private handleService: HandleErrorService
+    private handleService: HandleErrorService,
+    private messageService: MessageService
   ) {
   }
 
@@ -28,6 +33,20 @@ export class PesquisaPessoasComponent implements OnInit {
       this.pessoaFilter.total = data['totalElements'];
       this.pessoas = data['content'] as Pessoa[];
     }).catch(error => {
+      this.handleService.handle(error);
+    });
+  }
+
+  deletar(pessoa: Pessoa) {
+    this.pessoaService.deletar(pessoa)
+      .then(() => {
+        this.table.reset();
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Operação Concluída!',
+          detail: `${pessoa.nome} foi excluído(a) com sucesso!`
+        });
+      }).catch(error => {
       this.handleService.handle(error);
     });
   }
