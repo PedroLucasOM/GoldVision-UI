@@ -6,6 +6,7 @@ import {LancamentosRoutingModule} from './lancamentos-routing.module';
 import {SharedModule} from '../../shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import {ComponentesModule} from '../../core/componentes/componentes.module';
+import {LancamentosService} from './lancamentos.service';
 
 @NgModule({
   declarations: [CadastroLancamentosComponent, PesquisaLancamentosComponent],
@@ -16,7 +17,7 @@ import {ComponentesModule} from '../../core/componentes/componentes.module';
     SharedModule,
     ComponentesModule
   ],
-  providers: []
+  providers: [LancamentosService]
 })
 export class LancamentosModule {
 }

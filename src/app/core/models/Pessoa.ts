@@ -14,3 +14,10 @@ export class Pessoa {
   public ativo: boolean;
   public endereco: Endereco;
 }
+
+export class PessoaFilter {
+  public nome: string;
+  public itensPorPagina = 5;
+  public pagina = 0;
+  public total: number;
+}

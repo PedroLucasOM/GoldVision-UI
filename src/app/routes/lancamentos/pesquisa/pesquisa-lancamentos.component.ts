@@ -25,15 +25,14 @@ export class PesquisaLancamentosComponent implements OnInit {
 
   resumir() {
     this.service.resumir(this.lancamentoFilter).then(data => {
-      this.lancamentoFilter.total = data.totalElements;
-      this.lancamentos = data.content as Lancamento[];
+      this.lancamentoFilter.total = data['totalElements'];
+      this.lancamentos = data['content'] as Lancamento[];
     }).catch(error => {
       this.handle.handle(error);
     });
   }
 
   changePage($event: any) {
-    console.log($event);
     const page = $event.first / $event.rows;
     this.lancamentoFilter.pagina = page;
     this.resumir();

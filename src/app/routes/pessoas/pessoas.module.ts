@@ -6,6 +6,7 @@ import {PesquisaPessoasComponent} from './pesquisa/pesquisa-pessoas.component';
 import {SharedModule} from '../../shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import {ComponentesModule} from '../../core/componentes/componentes.module';
+import {PessoasService} from './pessoas.service';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {ComponentesModule} from '../../core/componentes/componentes.module';
     PessoasRoutingModule,
     SharedModule,
     ComponentesModule
-  ]
+  ],
+  providers: [PessoasService]
 })
 export class PessoasModule {
 }

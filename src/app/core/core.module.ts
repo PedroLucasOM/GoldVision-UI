@@ -30,8 +30,7 @@ import {AuthGuard} from '../security/auth.guard';
     MessageService,
     AuthService,
     AuthGuard,
-    HandleErrorService,
-    LancamentosService
+    HandleErrorService
   ]
 })
 export class CoreModule {

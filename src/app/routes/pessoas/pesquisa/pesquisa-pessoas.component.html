@@ -5,15 +5,16 @@
     </div>
     <div class="ui-g-12 ui-fluid">
       <label for="nome">Nome</label>
-      <input id="nome" pInputText type="text">
+      <input id="nome" pInputText type="text" [(ngModel)]="pessoaFilter.nome">
     </div>
     <div class="ui-g-12">
-      <button label="Pesquisar" pButton></button>
+      <button label="Pesquisar" pButton (click)="filtrar()"></button>
     </div>
   </div>
   <div class="ui-g">
     <div class="ui-g-12">
-      <p-table [paginator]="true" [responsive]="true" [rows]="4" [value]="pessoas">
+      <p-table [paginator]="true" [responsive]="true" [rows]="pessoaFilter.itensPorPagina"
+               [totalRecords]="pessoaFilter.total" [lazy]="true" (onLazyLoad)="changePage($event)" [value]="pessoas">
         <ng-template pTemplate="header">
           <tr>
             <th>Nome</th>
@@ -25,11 +26,11 @@
         </ng-template>
         <ng-template let-pessoa pTemplate="body">
           <tr>
-            <td>{{pessoa.nome}}</td>
-            <td>{{pessoa.cidade}}</td>
-            <td>{{pessoa.estado}}</td>
-            <td><a href="javascript:;" pTooltip="{{pessoa.ativo ? 'Ativar' : 'Desativar'}}"
-                   tooltipPosition="top">{{pessoa.ativo ? 'Ativo' : 'Inativo'}}</a></td>
+            <td>{{pessoa?.nome}}</td>
+            <td>{{pessoa?.endereco?.cidade}}</td>
+            <td>{{pessoa?.endereco?.estado}}</td>
+            <td><a href="javascript:;" pTooltip="{{pessoa?.ativo ? 'Desativar' : 'Ativar'}}"
+                   tooltipPosition="top">{{pessoa?.ativo ? 'Ativo' : 'Inativo'}}</a></td>
             <td class="col-body-acoes">
               <button icon="pi pi-pencil" pButton pTooltip="Editar" tooltipPosition="top"
                       [disabled]="!auth.hasAuthority('ATUALIZAR_PESSOA')"></button>

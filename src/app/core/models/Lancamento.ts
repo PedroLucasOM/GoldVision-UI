@@ -19,10 +19,10 @@ export class Lancamento {
 }
 
 export class LancamentoFilter {
-  descricao: string;
-  dataVencimentoDe: Date;
-  dataVencimentoAte: Date;
-  itensPorPagina = 5;
-  pagina = 0;
-  total: number;
+  public descricao: string;
+  public dataVencimentoDe: Date;
+  public dataVencimentoAte: Date;
+  public itensPorPagina = 5;
+  public pagina = 0;
+  public total: number;
 }
