@@ -3,7 +3,15 @@ import {CommonModule} from '@angular/common';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {TableModule} from 'primeng/table';
-import {CalendarModule, DropdownModule, InputMaskModule, InputTextareaModule, SelectButtonModule, TooltipModule} from 'primeng/primeng';
+import {
+  CalendarModule, ConfirmationService,
+  ConfirmDialogModule,
+  DropdownModule,
+  InputMaskModule,
+  InputTextareaModule,
+  SelectButtonModule,
+  TooltipModule
+} from 'primeng/primeng';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {ToastModule} from 'primeng/toast';
 
@@ -22,7 +30,8 @@ import {ToastModule} from 'primeng/toast';
     InputTextareaModule,
     CurrencyMaskModule,
     InputMaskModule,
-    ToastModule
+    ToastModule,
+    ConfirmDialogModule
   ],
   exports: [
     ButtonModule,
@@ -36,8 +45,10 @@ import {ToastModule} from 'primeng/toast';
     InputTextareaModule,
     CurrencyMaskModule,
     InputMaskModule,
-    ToastModule
-  ]
+    ToastModule,
+    ConfirmDialogModule
+  ],
+  providers: [ConfirmationService]
 })
 export class PrimengModule {
 }

@@ -29,7 +29,7 @@
                [totalRecords]="lancamentoFilter.total"
                (onLazyLoad)="changePage($event)"
                [value]="lancamentos">
-        <ng-template pTemplate="emptymessage">
+        <ng-template pTemplate="emptymessage" *ngIf="!lancamentos">
           Nenhum lançamento encontrado
         </ng-template>
         <ng-template pTemplate="header">
@@ -49,7 +49,7 @@
             <td class="col-body-data">{{lancamento?.dataVencimento | date:'dd/MM/yyyy'}}</td>
             <td class="col-body-data">{{lancamento?.dataPagamento | date:'dd/MM/yyyy'}}</td>
             <td [style.color]="lancamento?.tipo === 'DESPESA' ? 'red' : 'blue'"
-                class="col-body-valor">{{lancamento?.valor}}</td>
+                class="col-body-valor">{{lancamento?.valor | number: '1.2-2'}}</td>
             <td>
               <button icon="pi pi-pencil" pButton pTooltip="Editar" tooltipPosition="top"
                       [disabled]="!auth.hasAuthority('ATUALIZAR_LANCAMENTO')"></button>

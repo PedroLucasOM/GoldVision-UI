@@ -4,7 +4,7 @@ import {Pessoa, PessoaFilter} from '../../../core/models/Pessoa';
 import {PessoasService} from '../pessoas.service';
 import {HandleErrorService} from '../../../core/services/handle-error.service';
 import {Table} from 'primeng/table';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-pesquisa-pessoas',
@@ -21,7 +21,8 @@ export class PesquisaPessoasComponent implements OnInit {
     private auth: AuthService,
     private pessoaService: PessoasService,
     private handleService: HandleErrorService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) {
   }
 
@@ -34,6 +35,18 @@ export class PesquisaPessoasComponent implements OnInit {
       this.pessoas = data['content'] as Pessoa[];
     }).catch(error => {
       this.handleService.handle(error);
+    });
+  }
+
+  confirmDelete(pessoa: Pessoa) {
+    this.confirmationService.confirm({
+      message: `Você tem certeza que deseja excluir ${pessoa.nome}?`,
+      header: 'Confirmação de exclusão',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        this.deletar(pessoa);
+      }
     });
   }
 
