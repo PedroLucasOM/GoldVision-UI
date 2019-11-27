@@ -28,7 +28,7 @@
                [lazy]="true"
                [totalRecords]="lancamentoFilter.total"
                (onLazyLoad)="changePage($event)"
-               [value]="lancamentos">
+               [value]="lancamentos" #lancamentoTable>
         <ng-template pTemplate="emptymessage" *ngIf="!lancamentos">
           Nenhum lançamento encontrado
         </ng-template>
@@ -54,6 +54,7 @@
               <button icon="pi pi-pencil" pButton pTooltip="Editar" tooltipPosition="top"
                       [disabled]="!auth.hasAuthority('ATUALIZAR_LANCAMENTO')"></button>
               <button icon="pi pi-trash" pButton pTooltip="Excluir" tooltipPosition="top"
+                      (click)="confirmDelete(lancamento)"
                       [disabled]="!auth.hasAuthority('DELETAR_LANCAMENTO')"></button>
             </td>
           </tr>

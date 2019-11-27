@@ -50,13 +50,28 @@ export class PesquisaPessoasComponent implements OnInit {
     });
   }
 
+  atualizarPropriedadeAtivo(pessoa: Pessoa) {
+    this.pessoaService.atualizarPropriedadeAtivo(pessoa.codigo, !pessoa.ativo)
+      .then(() => {
+        this.table.reset();
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Operação Concluída',
+          detail: `${pessoa.nome} foi ${pessoa.ativo ? 'desativada' : 'ativada'} com sucesso!`
+        });
+      })
+      .catch(error => {
+        this.handleService.handle(error);
+      });
+  }
+
   deletar(pessoa: Pessoa) {
     this.pessoaService.deletar(pessoa)
       .then(() => {
         this.table.reset();
         this.messageService.add({
           severity: 'success',
-          summary: 'Operação Concluída!',
+          summary: 'Operação Concluída',
           detail: `${pessoa.nome} foi excluído(a) com sucesso!`
         });
       }).catch(error => {

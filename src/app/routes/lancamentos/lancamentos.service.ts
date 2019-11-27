@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {LancamentoFilter} from '../../core/models/Lancamento';
+import {Lancamento, LancamentoFilter} from '../../core/models/Lancamento';
 import * as moment from 'moment';
 
 @Injectable({
@@ -33,5 +33,9 @@ export class LancamentosService {
     }
 
     return this.http.get(`${LancamentosService.lancamentosUrl}?resumir`, {params}).toPromise();
+  }
+
+  deletar(lancamento: Lancamento) {
+    return this.http.delete(`${LancamentosService.lancamentosUrl}/${lancamento.codigo}`).toPromise();
   }
 }

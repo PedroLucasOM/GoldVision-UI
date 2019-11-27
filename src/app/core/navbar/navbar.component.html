@@ -11,13 +11,17 @@
     <li *ngIf="auth.hasAuthority('LISTAR_LANCAMENTO')" class="navbar-menuitem">
       <a [routerLink]="['/lancamentos']" href="javascript:;">Lançamentos</a>
     </li>
+    <li *ngIf="auth.hasAuthority('LISTAR_PESSOA')" class="navbar-menuitem">
+      <a [routerLink]="['/pessoas']" href="javascript:;">Pessoas</a>
+    </li>
     <li *ngIf="auth.hasAuthority('LISTAR_CATEGORIA')" class="navbar-menuitem">
       <a href="javascript:;">Categorias</a>
     </li>
-    <li *ngIf="auth.hasAuthority('LISTAR_PESSOA')" class="navbar-menuitem">
-      <a [routerLink]="['/pessoas']" href="javascript:;">Pessoas</a></li>
     <li *ngIf="auth.hasAuthority('LISTAR_USUARIO')" class="navbar-menuitem">
       <a href="javascript:;">Usuários</a>
+    </li>
+    <li *ngIf="auth.hasAuthority('LISTAR_PERMISSAO')" class="navbar-menuitem">
+      <a href="javascript:;">Permissões</a>
     </li>
     <li class="navbar-menuitem">
       <a (click)="auth.logout()" href="javascript:;">Logout</a>

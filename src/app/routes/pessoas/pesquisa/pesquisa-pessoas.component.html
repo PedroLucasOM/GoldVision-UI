@@ -26,13 +26,16 @@
             <th class="col-header-acoes"></th>
           </tr>
         </ng-template>
+        <ng-template pTemplate="emptymessage" *ngIf="!pessoas">
+          Nenhuma pessoa encontrada
+        </ng-template>
         <ng-template let-pessoa pTemplate="body">
           <tr>
             <td>{{pessoa?.nome}}</td>
             <td>{{pessoa?.endereco?.cidade}}</td>
             <td>{{pessoa?.endereco?.estado}}</td>
             <td><a href="javascript:;" pTooltip="{{pessoa?.ativo ? 'Desativar' : 'Ativar'}}"
-                   tooltipPosition="top">{{pessoa?.ativo ? 'Ativo' : 'Inativo'}}</a></td>
+                   tooltipPosition="top" (click)="atualizarPropriedadeAtivo(pessoa)">{{pessoa?.ativo ? 'Ativo' : 'Inativo'}}</a></td>
             <td class="col-body-acoes">
               <button icon="pi pi-pencil" pButton pTooltip="Editar" tooltipPosition="top"
                       [disabled]="!auth.hasAuthority('ATUALIZAR_PESSOA')"></button>

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {Pessoa, PessoaFilter} from '../../core/models/Pessoa';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,11 @@ export class PessoasService {
     }
 
     return this.http.get(PessoasService.url, {params}).toPromise();
+  }
+
+  atualizarPropriedadeAtivo(codigo: number, ativo: boolean) {
+    return this.http.put(`${PessoasService.url}/${codigo}/ativo`, ativo,
+      {headers: new HttpHeaders({'Content-Type': 'application/json'})}).toPromise();
   }
 
   deletar(pessoa: Pessoa) {
