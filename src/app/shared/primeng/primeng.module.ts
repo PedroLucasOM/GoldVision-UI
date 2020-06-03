@@ -4,7 +4,8 @@ import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {TableModule} from 'primeng/table';
 import {
-  CalendarModule, ConfirmationService,
+  CalendarModule,
+  ConfirmationService,
   ConfirmDialogModule,
   DropdownModule,
   InputMaskModule,

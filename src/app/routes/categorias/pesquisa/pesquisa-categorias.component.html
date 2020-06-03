@@ -1,0 +1,52 @@
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Categorias</h1>
+    </div>
+    <div class="ui-g-12 ui-fluid">
+      <label for="nome">Nome</label>
+      <input [(ngModel)]="categoriaFilter.nome" id="nome" pInputText type="text">
+    </div>
+    <div class="ui-g-12">
+      <button (click)="filtrar()" label="Pesquisar" pButton></button>
+    </div>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table #table (onLazyLoad)="changePage($event)" [lazy]="true"
+               [paginator]="true" [responsive]="true" [rows]="categoriaFilter.itensPorPagina"
+               [totalRecords]="categoriaFilter.total"
+               [value]="categorias">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nome</th>
+            <th class="col-header-acoes"></th>
+          </tr>
+        </ng-template>
+        <ng-template *ngIf="!categorias" pTemplate="emptymessage">
+          Nenhuma categoria encontrada
+        </ng-template>
+        <ng-template let-categoria pTemplate="body">
+          <tr>
+            <td>{{categoria?.nome}}</td>
+            <td class="col-body-acoes">
+              <button [disabled]="!auth.hasAuthority('ATUALIZAR_CATEGORIA')" icon="pi pi-pencil" pButton
+                      pTooltip="Editar"
+                      tooltipPosition="top"></button>
+              <button (click)="confirmDelete(categoria)" [disabled]="!auth.hasAuthority('DELETAR_CATEGORIA')"
+                      icon="pi pi-trash" pButton
+                      pTooltip="Excluir"
+                      tooltipPosition="top"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="ui-g-12">
+      <button [disabled]="!auth.hasAuthority('SALVAR_CATEGORIA')" [routerLink]="'/categorias/novo'"
+              label="Nova Categoria"
+              pButton></button>
+    </div>
+  </div>
+</div>

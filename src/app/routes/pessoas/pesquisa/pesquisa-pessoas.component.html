@@ -6,17 +6,18 @@
     </div>
     <div class="ui-g-12 ui-fluid">
       <label for="nome">Nome</label>
-      <input id="nome" pInputText type="text" [(ngModel)]="pessoaFilter.nome">
+      <input [(ngModel)]="pessoaFilter.nome" id="nome" pInputText type="text">
     </div>
     <div class="ui-g-12">
-      <button label="Pesquisar" pButton (click)="filtrar()"></button>
+      <button (click)="filtrar()" label="Pesquisar" pButton></button>
     </div>
   </div>
   <div class="ui-g">
     <div class="ui-g-12">
-      <p-table [paginator]="true" [responsive]="true" [rows]="pessoaFilter.itensPorPagina"
-               [totalRecords]="pessoaFilter.total" [lazy]="true" (onLazyLoad)="changePage($event)" [value]="pessoas"
-               #table>
+      <p-table #table (onLazyLoad)="changePage($event)" [lazy]="true"
+               [paginator]="true" [responsive]="true" [rows]="pessoaFilter.itensPorPagina"
+               [totalRecords]="pessoaFilter.total"
+               [value]="pessoas">
         <ng-template pTemplate="header">
           <tr>
             <th>Nome</th>
@@ -26,7 +27,7 @@
             <th class="col-header-acoes"></th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="emptymessage" *ngIf="!pessoas">
+        <ng-template *ngIf="!pessoas" pTemplate="emptymessage">
           Nenhuma pessoa encontrada
         </ng-template>
         <ng-template let-pessoa pTemplate="body">
@@ -34,22 +35,24 @@
             <td>{{pessoa?.nome}}</td>
             <td>{{pessoa?.endereco?.cidade}}</td>
             <td>{{pessoa?.endereco?.estado}}</td>
-            <td><a href="javascript:;" pTooltip="{{pessoa?.ativo ? 'Desativar' : 'Ativar'}}"
-                   tooltipPosition="top" (click)="atualizarPropriedadeAtivo(pessoa)">{{pessoa?.ativo ? 'Ativo' : 'Inativo'}}</a></td>
+            <td><a (click)="atualizarPropriedadeAtivo(pessoa)" href="javascript:"
+                   pTooltip="{{pessoa?.ativo ? 'Desativar' : 'Ativar'}}"
+                   tooltipPosition="top">{{pessoa?.ativo ? 'Ativo' : 'Inativo'}}</a></td>
             <td class="col-body-acoes">
-              <button icon="pi pi-pencil" pButton pTooltip="Editar" tooltipPosition="top"
-                      [disabled]="!auth.hasAuthority('ATUALIZAR_PESSOA')"></button>
-              <button icon="pi pi-trash" pButton pTooltip="Excluir" tooltipPosition="top"
-                      (click)="confirmDelete(pessoa)"
-                      [disabled]="!auth.hasAuthority('DELETAR_PESSOA')"></button>
+              <button [disabled]="!auth.hasAuthority('ATUALIZAR_PESSOA')" icon="pi pi-pencil" pButton pTooltip="Editar"
+                      tooltipPosition="top"></button>
+              <button (click)="confirmDelete(pessoa)" [disabled]="!auth.hasAuthority('DELETAR_PESSOA')"
+                      icon="pi pi-trash" pButton
+                      pTooltip="Excluir"
+                      tooltipPosition="top"></button>
             </td>
           </tr>
         </ng-template>
       </p-table>
     </div>
     <div class="ui-g-12">
-      <button [routerLink]="'/pessoas/novo'" label="Nova Pessoa" pButton
-              [disabled]="!auth.hasAuthority('SALVAR_PESSOA')"></button>
+      <button [disabled]="!auth.hasAuthority('SALVAR_PESSOA')" [routerLink]="'/pessoas/novo'" label="Nova Pessoa"
+              pButton></button>
     </div>
   </div>
 </div>

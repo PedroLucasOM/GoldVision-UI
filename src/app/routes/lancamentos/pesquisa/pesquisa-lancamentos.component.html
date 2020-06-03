@@ -5,31 +5,33 @@
     </div>
     <div class="ui-g-12 ui-fluid">
       <label for="descricao">Descrição</label>
-      <input id="descricao" pInputText type="text" [(ngModel)]="lancamentoFilter.descricao">
+      <input [(ngModel)]="lancamentoFilter.descricao" id="descricao" pInputText type="text">
     </div>
     <div class="ui-g-12">
       <label style="display: block">Vencimento</label>
-      <p-calendar name="dataVencimentoDe" dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
-                  [(ngModel)]="lancamentoFilter.dataVencimentoDe" [readonlyInput]="true"></p-calendar>
+      <p-calendar [(ngModel)]="lancamentoFilter.dataVencimentoDe" [inputStyle]="{ width: '95px' }"
+                  [readonlyInput]="true"
+                  dateFormat="dd/mm/yy" name="dataVencimentoDe"></p-calendar>
 
       <label>até</label>
-      <p-calendar name="dataVencimentoAte" dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
-                  [(ngModel)]="lancamentoFilter.dataVencimentoAte" [readonlyInput]="true"></p-calendar>
+      <p-calendar [(ngModel)]="lancamentoFilter.dataVencimentoAte" [inputStyle]="{ width: '95px' }"
+                  [readonlyInput]="true"
+                  dateFormat="dd/mm/yy" name="dataVencimentoAte"></p-calendar>
     </div>
     <div class="ui-g-12">
-      <button label="Pesquisar" pButton type="submit" (click)="resumir()"></button>
+      <button (click)="resumir()" label="Pesquisar" pButton type="submit"></button>
     </div>
   </div>
   <div class="ui-g">
     <div class="ui-g-12">
-      <p-table [paginator]="true"
+      <p-table #lancamentoTable
+               (onLazyLoad)="changePage($event)"
+               [lazy]="true"
+               [paginator]="true"
                [responsive]="true"
                [rows]="lancamentoFilter.itensPorPagina"
-               [lazy]="true"
-               [totalRecords]="lancamentoFilter.total"
-               (onLazyLoad)="changePage($event)"
-               [value]="lancamentos" #lancamentoTable>
-        <ng-template pTemplate="emptymessage" *ngIf="!lancamentos">
+               [totalRecords]="lancamentoFilter.total" [value]="lancamentos">
+        <ng-template *ngIf="!lancamentos" pTemplate="emptymessage">
           Nenhum lançamento encontrado
         </ng-template>
         <ng-template pTemplate="header">
@@ -51,19 +53,22 @@
             <td [style.color]="lancamento?.tipo === 'DESPESA' ? 'red' : 'blue'"
                 class="col-body-valor">{{lancamento?.valor | number: '1.2-2'}}</td>
             <td>
-              <button icon="pi pi-pencil" pButton pTooltip="Editar" tooltipPosition="top"
-                      [disabled]="!auth.hasAuthority('ATUALIZAR_LANCAMENTO')"></button>
-              <button icon="pi pi-trash" pButton pTooltip="Excluir" tooltipPosition="top"
-                      (click)="confirmDelete(lancamento)"
-                      [disabled]="!auth.hasAuthority('DELETAR_LANCAMENTO')"></button>
+              <button [disabled]="!auth.hasAuthority('ATUALIZAR_LANCAMENTO')" icon="pi pi-pencil" pButton
+                      pTooltip="Editar"
+                      tooltipPosition="top"></button>
+              <button (click)="confirmDelete(lancamento)" [disabled]="!auth.hasAuthority('DELETAR_LANCAMENTO')"
+                      icon="pi pi-trash" pButton
+                      pTooltip="Excluir"
+                      tooltipPosition="top"></button>
             </td>
           </tr>
         </ng-template>
       </p-table>
     </div>
     <div class="ui-g-12">
-      <button [routerLink]="'/lancamentos/novo'" label="Novo Lançamento" pButton
-              [disabled]="!auth.hasAuthority('SALVAR_LANCAMENTO')"></button>
+      <button [disabled]="!auth.hasAuthority('SALVAR_LANCAMENTO')" [routerLink]="'/lancamentos/novo'"
+              label="Novo Lançamento"
+              pButton></button>
     </div>
   </div>
 </div>

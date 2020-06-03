@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: './pessoas/pessoas.module#PessoasModule'
   },
   {
+    path: 'categorias',
+    loadChildren: './categorias/categorias.module#CategoriasModule'
+  },
+  {
     path: '**',
     redirectTo: 'lancamentos',
     pathMatch: 'full'
