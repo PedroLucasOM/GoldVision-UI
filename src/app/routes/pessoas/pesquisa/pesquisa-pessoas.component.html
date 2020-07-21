@@ -40,7 +40,7 @@
                    tooltipPosition="top">{{pessoa?.ativo ? 'Ativo' : 'Inativo'}}</a></td>
             <td class="col-body-acoes">
               <button [disabled]="!auth.hasAuthority('ATUALIZAR_PESSOA')" icon="pi pi-pencil" pButton pTooltip="Editar"
-                      tooltipPosition="top"></button>
+                      (click)="editar(pessoa?.codigo)" tooltipPosition="top"></button>
               <button (click)="confirmDelete(pessoa)" [disabled]="!auth.hasAuthority('DELETAR_PESSOA')"
                       icon="pi pi-trash" pButton
                       pTooltip="Excluir"

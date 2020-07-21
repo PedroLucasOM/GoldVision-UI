@@ -1,63 +1,76 @@
 <div class="container">
-  <form #formLancaemento="ngForm" autocomplete="off">
+  <form #formLancamento="ngForm" (ngSubmit)="salvar(formLancamento)" autocomplete="off">
     <div class="ui-g">
       <div class="ui-g-12">
-        <h1>Novo Lançamento</h1>
+        <h1>{{isEditing ? "Editar Lançamento" : "Novo Lançamento"}}</h1>
       </div>
       <div class="ui-g-12">
-        <p-selectButton #tipo="ngModel" [options]="tipos" name="tipo" ngModel required></p-selectButton>
+        <p-selectButton #tipo="ngModel" [(ngModel)]="lancamento.tipo" [options]="tipos" name="tipo"
+                        required></p-selectButton>
         <app-mensagem-erro [control]="tipo" error="required" text="O tipo é obrigatório"></app-mensagem-erro>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
         <label for="vencimento">Vencimento</label>
-        <p-calendar #dataVencimento="ngModel" id="vencimento" name="dataVencimento" ngModel required></p-calendar>
+        <p-calendar #dataVencimento="ngModel" [(ngModel)]="lancamento.dataVencimento" [locale]="locationService.pt"
+                    dateFormat="dd/mm/yy"
+                    id="vencimento" name="dataVencimento" required></p-calendar>
         <app-mensagem-erro [control]="dataVencimento" error="required"
                            text="A data de vencimento é obrigatória"></app-mensagem-erro>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
         <label for="recebimento_pagamento">Recebimento</label>
-        <p-calendar #dataPagamento="ngModel" id="recebimento_pagamento" name="dataPagamento"
-                    ngModel></p-calendar>
+        <p-calendar #dataPagamento="ngModel" [(ngModel)]="lancamento.dataPagamento" [locale]="locationService.pt"
+                    dateFormat="dd/mm/yy" id="recebimento_pagamento"
+                    name="dataPagamento"></p-calendar>
       </div>
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label for="descricao">Descrição</label>
-        <input #descricao="ngModel" id="descricao" maxlength="30" name="descricao" ngModel pInputText required
-               type="text">
+        <input #descricao="ngModel" [(ngModel)]="lancamento.descricao" id="descricao" maxlength="30" name="descricao"
+               pInputText required type="text">
         <app-mensagem-erro [control]="descricao" error="required"
                            text="A descrição é obrigatória"></app-mensagem-erro>
       </div>
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label for="valor">Valor</label>
-        <input #valor="ngModel" [options]="{ prefix: '', thousands: '.', decimal: ',' }" currencyMask id="valor"
-               name="valor"
-               ngModel pInputText required type="text">
+        <input #valor="ngModel" [(ngModel)]="lancamento.valor"
+               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" currencyMask
+               id="valor"
+               name="valor" pInputText required type="text">
         <app-mensagem-erro [control]="valor" error="required"
                            text="O valor é obrigatório"></app-mensagem-erro>
       </div>
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label for="categoria">Categoria</label>
-        <p-dropdown #categoria="ngModel" [autoWidth]="false" [filter]="true" [options]="categorias" id="categoria"
-                    name="categoria"
-                    ngModel placeholder="Selecione" required></p-dropdown>
+        <ng-select #categoria="ngModel" (clear)="onCategoriaClear()" (scrollToEnd)="onCategoriaScrollEnded()"
+                   (search)="onCategoriaSearch($event)" [(ngModel)]="lancamento.categoria.codigo"
+                   [clearable]="true" [items]="categorias" [searchable]="true" [virtualScroll]="true"
+                   bindLabel="nome" bindValue="codigo" clearAllText="Limpar"
+                   id="categoria" name="categoria" notFoundText="Nenhuma categoria encontrada"
+                   placeholder="Selecione" required></ng-select>
         <app-mensagem-erro [control]="categoria" error="required"
                            text="A categoria é obrigatória"></app-mensagem-erro>
       </div>
       <div class="ui-g-12 ui-md-6 ui-fluid">
-        <label for="pessoa">Pessoa</label>
-        <p-dropdown #pessoa="ngModel" [autoWidth]="false" [filter]="true" [options]="pessoas" id="pessoa" name="pessoa"
-                    ngModel placeholder="Selecione" required></p-dropdown>
+        <label for="categoria">Pessoa</label>
+        <ng-select #pessoa="ngModel" (clear)="onPessoaClear()" (scrollToEnd)="onPessoaScrollEnded()"
+                   (search)="onPessoaSearch($event)" [(ngModel)]="lancamento.pessoa.codigo"
+                   [clearable]="true" [items]="pessoas" [searchable]="true" [virtualScroll]="true"
+                   bindLabel="nome" bindValue="codigo" clearAllText="Limpar" id="pessoa"
+                   name="pessoa" notFoundText="Nenhuma pessoa encontrada"
+                   placeholder="Selecione" required></ng-select>
         <app-mensagem-erro [control]="pessoa" error="required"
                            text="A pessoa é obrigatória"></app-mensagem-erro>
       </div>
       <div class="ui-g-12 ui-fluid">
         <label for="observacao">Observação</label>
-        <textarea #observacao="ngModel" id="observacao" maxlength="100" name="observacao" ngModel pInputTextarea
-                  rows="3"></textarea>
+        <textarea #observacao="ngModel" [(ngModel)]="lancamento.observacao" id="observacao" maxlength="100"
+                  name="observacao" pInputTextarea rows="3"></textarea>
       </div>
       <div class="ui-g-12">
-        <button [disabled]="formLancaemento.invalid" label="Salvar" pButton type="button"></button>
-        <button class="ui-button-info" label="Limpar" pButton type="button"></button>
-        <a [routerLink]="'/lancamentos'" href="javascript:;">Voltar para a pesquisa</a>
+        <button [disabled]="formLancamento.invalid" label="Salvar" pButton type="submit"></button>
+        <button (click)="novo(formLancamento)" *ngIf="isEditing" label="Novo" pButton type="button"></button>
+        <button (click)="clear(formLancamento)" class="ui-button-info" label="Limpar" pButton type="button"></button>
+        <a [routerLink]="'/lancamentos'" href="javascript:">Voltar para a pesquisa</a>
       </div>
     </div>
   </form>

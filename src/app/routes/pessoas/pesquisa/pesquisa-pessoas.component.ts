@@ -5,6 +5,7 @@ import {PessoasService} from '../pessoas.service';
 import {HandleErrorService} from '../../../core/services/handle-error.service';
 import {Table} from 'primeng/table';
 import {ConfirmationService, MessageService} from 'primeng/api';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-pesquisa-pessoas',
@@ -17,25 +18,37 @@ export class PesquisaPessoasComponent implements OnInit {
 
   @ViewChild('table', {static: true}) table: Table;
 
+  loading: boolean;
+
   constructor(
     private auth: AuthService,
     private pessoaService: PessoasService,
     private handleService: HandleErrorService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
   }
 
-  filtrar() {
+  listarPessoas() {
+    this.loading = true;
     this.pessoaService.filtrar(this.pessoaFilter).then(data => {
       this.pessoaFilter.total = data['totalElements'];
       this.pessoas = data['content'] as Pessoa[];
+      this.loading = false;
     }).catch(error => {
+      this.loading = false;
       this.handleService.handle(error);
     });
+  }
+
+  filtrar() {
+    this.table.reset();
+    this.pessoaFilter.pagina = 0;
+    this.listarPessoas();
   }
 
   confirmDelete(pessoa: Pessoa) {
@@ -82,6 +95,10 @@ export class PesquisaPessoasComponent implements OnInit {
   changePage($event: any) {
     const page = $event.first / $event.rows;
     this.pessoaFilter.pagina = page;
-    this.filtrar();
+    this.listarPessoas();
+  }
+
+  editar(codigo: number) {
+    this.router.navigate([`pessoas/editar/${codigo}`]);
   }
 }

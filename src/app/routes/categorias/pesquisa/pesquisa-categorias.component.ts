@@ -5,6 +5,7 @@ import {HandleErrorService} from '../../../core/services/handle-error.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {Categoria, CategoriaFilter} from '../../../core/models/Categoria';
 import {CategoriasService} from '../categorias.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-pesquisa-categorias',
@@ -16,6 +17,8 @@ export class PesquisaCategoriasComponent implements OnInit {
   categorias: Categoria[];
   categoriaFilter: CategoriaFilter = new CategoriaFilter();
 
+  loading: boolean;
+
   @ViewChild('table', {static: true}) table: Table;
 
   constructor(
@@ -23,20 +26,30 @@ export class PesquisaCategoriasComponent implements OnInit {
     private categoriaService: CategoriasService,
     private handleService: HandleErrorService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
   }
 
-  filtrar() {
+  listarCategorias() {
+    this.loading = true;
     this.categoriaService.filtrar(this.categoriaFilter).then(data => {
       this.categoriaFilter.total = data['totalElements'];
       this.categorias = data['content'] as Categoria[];
+      this.loading = false;
     }).catch(error => {
       this.handleService.handle(error);
+      this.loading = false;
     });
+  }
+
+  filtrar() {
+    this.table.reset();
+    this.categoriaFilter.pagina = 0;
+    this.listarCategorias();
   }
 
   confirmDelete(categoria: Categoria) {
@@ -68,7 +81,10 @@ export class PesquisaCategoriasComponent implements OnInit {
   changePage($event: any) {
     const page = $event.first / $event.rows;
     this.categoriaFilter.pagina = page;
-    this.filtrar();
+    this.listarCategorias();
   }
 
+  editar(codigo: number) {
+    this.router.navigate([`categorias/${codigo}`]);
+  }
 }

@@ -2,11 +2,12 @@
   <div class="container">
     <div class="ui-g">
       <div class="ui-g-12">
-        <a (click)="exibirMenu = !exibirMenu" class="navbar-toggle" href="javascript:"><i class="pi pi-bars"></i></a>
+        <a (click)="navbarService.onMudarExibicaoMenu()" class="navbar-toggle" href="javascript:"><i
+          class="pi pi-bars"></i></a>
       </div>
     </div>
   </div>
-  <ul [hidden]="!exibirMenu" class="navbar-menu">
+  <ul [hidden]="!getExibicaoMenu()" class="navbar-menu">
     <li class="navbar-usuario">{{auth.token?.nome}}</li>
     <li *ngIf="auth.hasAuthority('LISTAR_LANCAMENTO')" class="navbar-menuitem">
       <a [routerLink]="['/lancamentos']" href="javascript:">Lançamentos</a>

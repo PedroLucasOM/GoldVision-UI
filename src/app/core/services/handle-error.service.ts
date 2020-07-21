@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {MessageService} from 'primeng/api';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
+import {HandleMessageService} from './handle-message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 export class HandleErrorService {
 
   constructor(
-    private messageService: MessageService,
+    private handleMessageService: HandleMessageService,
     private router: Router) {
   }
 
@@ -48,7 +48,7 @@ export class HandleErrorService {
       console.error('Ocorreu um erro', errorResponse);
     }
 
-    this.messageService.add({severity: 'error', summary: 'Operação Cancelada!', detail: msg});
+    this.handleMessageService.onShowError(msg);
   }
 
 }

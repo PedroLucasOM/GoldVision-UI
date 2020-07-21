@@ -9,14 +9,14 @@
       <input [(ngModel)]="categoriaFilter.nome" id="nome" pInputText type="text">
     </div>
     <div class="ui-g-12">
-      <button (click)="filtrar()" label="Pesquisar" pButton></button>
+      <button (click)="filtrar()" label="Pesquisar" pButton type="button"></button>
     </div>
   </div>
   <div class="ui-g">
     <div class="ui-g-12">
       <p-table #table (onLazyLoad)="changePage($event)" [lazy]="true"
                [paginator]="true" [responsive]="true" [rows]="categoriaFilter.itensPorPagina"
-               [totalRecords]="categoriaFilter.total"
+               [loading]="loading" [totalRecords]="categoriaFilter.total"
                [value]="categorias">
         <ng-template pTemplate="header">
           <tr>
@@ -31,7 +31,8 @@
           <tr>
             <td>{{categoria?.nome}}</td>
             <td class="col-body-acoes">
-              <button [disabled]="!auth.hasAuthority('ATUALIZAR_CATEGORIA')" icon="pi pi-pencil" pButton
+              <button (click)="editar(categoria.codigo)" [disabled]="!auth.hasAuthority('ATUALIZAR_CATEGORIA')"
+                      icon="pi pi-pencil" pButton
                       pTooltip="Editar"
                       tooltipPosition="top"></button>
               <button (click)="confirmDelete(categoria)" [disabled]="!auth.hasAuthority('DELETAR_CATEGORIA')"

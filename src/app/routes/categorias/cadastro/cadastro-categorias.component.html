@@ -1,0 +1,22 @@
+<div class="container">
+  <form #formCategoria="ngForm" (ngSubmit)="salvar(formCategoria)" autocomplete="off">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{isEditing ? 'Editar Categoria' : 'Nova Categoria'}}</h1>
+      </div>
+      <div class="ui-g-12 ui-fluid">
+        <label for="nome">Nome</label>
+        <input #nome="ngModel" [(ngModel)]="categoria.nome" id="nome" maxlength="50" name="nome" pInputText
+               required
+               type="text">
+        <app-mensagem-erro [control]="nome" error="required" text="O nome é obrigatório"></app-mensagem-erro>
+      </div>
+      <div class="ui-g-12">
+        <button [disabled]="formCategoria.invalid" label="Salvar" pButton type="submit"></button>
+        <button (click)="limparFormulario(formCategoria)" class="ui-button-info" label="Limpar" pButton
+                type="button"></button>
+        <a [routerLink]="'/categorias'" href="javascript:">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+</div>

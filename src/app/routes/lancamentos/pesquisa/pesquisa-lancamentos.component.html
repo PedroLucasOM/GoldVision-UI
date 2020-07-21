@@ -1,3 +1,4 @@
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 <div class="container">
   <div class="ui-g">
     <div class="ui-g-12">
@@ -9,13 +10,13 @@
     </div>
     <div class="ui-g-12">
       <label style="display: block">Vencimento</label>
-      <p-calendar [(ngModel)]="lancamentoFilter.dataVencimentoDe" [inputStyle]="{ width: '95px' }"
-                  [readonlyInput]="true"
+      <p-calendar [(ngModel)]="dataVencimentoDe" [inputStyle]="{ width: '95px' }"
+                  [locale]="locationService.pt" [readonlyInput]="true"
                   dateFormat="dd/mm/yy" name="dataVencimentoDe"></p-calendar>
 
       <label>até</label>
-      <p-calendar [(ngModel)]="lancamentoFilter.dataVencimentoAte" [inputStyle]="{ width: '95px' }"
-                  [readonlyInput]="true"
+      <p-calendar [(ngModel)]="dataVencimentoAte" [inputStyle]="{ width: '95px' }"
+                  [locale]="locationService.pt" [readonlyInput]="true"
                   dateFormat="dd/mm/yy" name="dataVencimentoAte"></p-calendar>
     </div>
     <div class="ui-g-12">
@@ -25,7 +26,7 @@
   <div class="ui-g">
     <div class="ui-g-12">
       <p-table #lancamentoTable
-               (onLazyLoad)="changePage($event)"
+               (onLazyLoad)="changePage($event)" [loading]="loading"
                [lazy]="true"
                [paginator]="true"
                [responsive]="true"
@@ -53,7 +54,9 @@
             <td [style.color]="lancamento?.tipo === 'DESPESA' ? 'red' : 'blue'"
                 class="col-body-valor">{{lancamento?.valor | number: '1.2-2'}}</td>
             <td>
-              <button [disabled]="!auth.hasAuthority('ATUALIZAR_LANCAMENTO')" icon="pi pi-pencil" pButton
+              <button (click)="editar(lancamento?.codigo)"
+                      [disabled]="!auth.hasAuthority('ATUALIZAR_LANCAMENTO')"
+                      icon="pi pi-pencil" pButton
                       pTooltip="Editar"
                       tooltipPosition="top"></button>
               <button (click)="confirmDelete(lancamento)" [disabled]="!auth.hasAuthority('DELETAR_LANCAMENTO')"

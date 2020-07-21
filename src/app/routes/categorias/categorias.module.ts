@@ -6,10 +6,11 @@ import {CategoriasService} from './categorias.service';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../../shared/shared.module';
 import {ComponentesModule} from '../../core/componentes/componentes.module';
+import {CadastroCategoriasComponent} from './cadastro/cadastro-categorias.component';
 
 
 @NgModule({
-  declarations: [PesquisaCategoriasComponent],
+  declarations: [PesquisaCategoriasComponent, CadastroCategoriasComponent],
   imports: [
     CommonModule,
     FormsModule,

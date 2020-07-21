@@ -23,7 +23,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'editar/:uuid',
+    path: 'editar/:codigo',
     component: CadastroPessoasComponent,
     canActivate: [AuthGuard],
     data: {

@@ -23,17 +23,12 @@ const routes: Routes = [
     }
   },
   {
-    path: 'editar/:uuid',
+    path: 'editar/:codigo',
     component: CadastroLancamentosComponent,
     canActivate: [AuthGuard],
     data: {
       authorities: ['ATUALIZAR_LANCAMENTO']
     }
-  },
-  {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full'
   }
 ];
 

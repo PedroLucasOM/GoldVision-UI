@@ -8,4 +8,5 @@ export class CategoriaFilter {
   public itensPorPagina = 5;
   public pagina = 0;
   public total: number;
+  public isUltimaPagina: boolean;
 }

@@ -11,7 +11,7 @@ import {
   InputMaskModule,
   InputTextareaModule,
   SelectButtonModule,
-  TooltipModule
+  TooltipModule,
 } from 'primeng/primeng';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {ToastModule} from 'primeng/toast';

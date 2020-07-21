@@ -11,8 +11,8 @@ export class Endereco {
 export class Pessoa {
   public codigo: number;
   public nome: string;
-  public ativo: boolean;
-  public endereco: Endereco;
+  public ativo = false;
+  public endereco: Endereco = new Endereco();
 }
 
 export class PessoaFilter {
@@ -20,4 +20,5 @@ export class PessoaFilter {
   public itensPorPagina = 5;
   public pagina = 0;
   public total: number;
+  public isUltimaPagina: boolean;
 }

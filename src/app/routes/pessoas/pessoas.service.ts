@@ -13,7 +13,7 @@ export class PessoasService {
   constructor(private http: HttpClient) {
   }
 
-  filtrar(pessoaFilter: PessoaFilter) {
+  filtrar(pessoaFilter: PessoaFilter): Promise<any[]> {
     let params = new HttpParams();
 
     params = params.set('page', pessoaFilter.pagina.toString());
@@ -23,7 +23,25 @@ export class PessoasService {
       params = params.set('nome', pessoaFilter.nome);
     }
 
-    return this.http.get(PessoasService.url, {params}).toPromise();
+    return this.http.get<any[]>(PessoasService.url, {params}).toPromise();
+  }
+
+  cadastrar(pessoa: Pessoa): Promise<Pessoa> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post<Pessoa>(PessoasService.url, pessoa, {headers}).toPromise();
+  }
+
+  atualizar(codigo: number, pessoa: Pessoa): Promise<Pessoa> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.put<Pessoa>(`${PessoasService.url}/${codigo}`, pessoa, {headers}).toPromise();
+  }
+
+  buscarPorCodigo(codigo: number): Promise<Pessoa> {
+    return this.http.get<Pessoa>(`${PessoasService.url}/${codigo}`).toPromise();
   }
 
   atualizarPropriedadeAtivo(codigo: number, ativo: boolean) {

@@ -13,15 +13,15 @@ export class Lancamento {
   public descricao: string;
   public observacao: string;
   public valor: number;
-  public tipo: TipoLancamento;
-  public categoria: Categoria;
-  public pessoa: Pessoa;
+  public tipo: TipoLancamento = TipoLancamento.Receita;
+  public categoria: Categoria = new Categoria();
+  public pessoa: Pessoa = new Pessoa();
 }
 
 export class LancamentoFilter {
   public descricao: string;
-  public dataVencimentoDe: Date;
-  public dataVencimentoAte: Date;
+  public dataVencimentoDe: string;
+  public dataVencimentoAte: string;
   public itensPorPagina = 5;
   public pagina = 0;
   public total: number;

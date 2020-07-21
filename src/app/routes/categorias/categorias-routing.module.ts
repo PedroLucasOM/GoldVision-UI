@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {PesquisaCategoriasComponent} from './pesquisa/pesquisa-categorias.component';
 import {AuthGuard} from '../../security/auth.guard';
+import {CadastroCategoriasComponent} from './cadastro/cadastro-categorias.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,22 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {
       authorities: ['LISTAR_CATEGORIA']
+    }
+  },
+  {
+    path: 'novo',
+    component: CadastroCategoriasComponent,
+    canActivate: [AuthGuard],
+    data: {
+      authorities: ['SALVAR_CATEGORIA']
+    }
+  },
+  {
+    path: ':codigo',
+    component: CadastroCategoriasComponent,
+    canActivate: [AuthGuard],
+    data: {
+      authorities: ['ATUALIZAR_CATEGORIA']
     }
   },
   {
