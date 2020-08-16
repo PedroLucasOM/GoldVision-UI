@@ -13,6 +13,8 @@ import {NavbarService} from './services/navbar.service';
 import {MessageService} from 'primeng/api';
 import {LocationService} from './services/location.service';
 import {UtilService} from './services/util.service';
+import {CustomValidationService} from './services/custom-validation.service';
+import {DiretivasModule} from './diretivas/diretivas.module';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -20,12 +22,14 @@ import {UtilService} from './services/util.service';
     CommonModule,
     RouterModule,
     ComponentesModule,
+    DiretivasModule,
     SharedModule,
     HttpClientModule
   ],
   exports: [
     NavbarComponent,
     ComponentesModule,
+    DiretivasModule,
     SharedModule,
     HttpClientModule
   ],
@@ -37,7 +41,8 @@ import {UtilService} from './services/util.service';
     HandleErrorService,
     NavbarService,
     LocationService,
-    UtilService
+    UtilService,
+    CustomValidationService
   ]
 })
 export class CoreModule {

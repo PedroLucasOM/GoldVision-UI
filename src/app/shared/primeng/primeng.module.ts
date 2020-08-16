@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {TableModule} from 'primeng/table';
+import {PickListModule} from 'primeng/picklist';
 import {
   CalendarModule,
   ConfirmationService,
@@ -32,7 +33,8 @@ import {ToastModule} from 'primeng/toast';
     CurrencyMaskModule,
     InputMaskModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    PickListModule
   ],
   exports: [
     ButtonModule,
@@ -47,7 +49,8 @@ import {ToastModule} from 'primeng/toast';
     CurrencyMaskModule,
     InputMaskModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    PickListModule
   ],
   providers: [ConfirmationService]
 })

@@ -1,0 +1,64 @@
+<div class="container">
+  <form #formUsuario="ngForm" (ngSubmit)="salvar(formUsuario)" [appMatchPassword]="['senha', 'confirmacaoSenha']"
+        autocomplete="off">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{isEditing ? "Editar Usuário" : "Novo Usuário"}}</h1>
+      </div>
+      <div class="ui-g-12 ui-fluid">
+        <label for="nome">Nome</label>
+        <input #nome="ngModel" [(ngModel)]="usuario.nome" id="nome" maxlength="50" minlength="3" name="nome" pInputText
+               required
+               type="text">
+        <app-mensagem-erro [control]="nome" error="required" text="O nome é obrigatório"></app-mensagem-erro>
+        <app-mensagem-erro [control]="nome" error="minlength"
+                           text="O nome deve ter, no mínimo, {{nome.errors?.minlength?.requiredLength}} caracteres."></app-mensagem-erro>
+      </div>
+      <div class="ui-g-12 ui-fluid">
+        <label for="nome">E-mail</label>
+        <input #email="ngModel" [(ngModel)]="usuario.email" id="email" maxlength="100" name="email" pInputText
+               required
+               type="email">
+        <app-mensagem-erro [control]="email" error="required" text="O e-mail é obrigatório"></app-mensagem-erro>
+      </div>
+      <div class="ui-g-6 ui-sm-12 ui-fluid">
+        <label for="nome">Senha</label>
+        <input #senha="ngModel" [(ngModel)]="usuarioSenha" [required]="!isEditing" id="senha" maxlength="100"
+               name="senha"
+               pInputText
+               type="password">
+        <app-mensagem-erro [control]="senha" error="required" text="A senha é obrigatória"></app-mensagem-erro>
+      </div>
+      <div class="ui-g-6 ui-sm-12 ui-fluid">
+        <label for="nome">Confirmação de Senha</label>
+        <input #confirmacaoSenha="ngModel" [(ngModel)]="usuarioConfirmacaoSenha" [required]="!isEditing"
+               id="confirmacaoSenha" maxlength="100" name="confirmacaoSenha"
+               pInputText type="password"
+               validateEqual="senha">
+        <app-mensagem-erro [control]="confirmacaoSenha" error="required"
+                           text="A confirmação de senha é obrigatória"></app-mensagem-erro>
+        <app-mensagem-erro [control]="confirmacaoSenha" error="passwordMismatch"
+                           text="As senhas não coincidem"></app-mensagem-erro>
+      </div>
+      <div class="ui-g-12 ui-fluid">
+        <label>Permissões</label>
+        <br>
+        <p-pickList [responsive]="true" [source]="permissoes" [target]="usuario.permissoes">
+          <ng-template let-permissao pTemplate="item">
+            <div class="ui-helper-clearfix">
+              <div>{{permissao.nome}}</div>
+            </div>
+          </ng-template>
+        </p-pickList>
+      </div>
+      <br>
+      <div class="ui-g-12">
+        <button [disabled]="formUsuario.invalid" label="Salvar" pButton type="submit"></button>
+        <button (click)="novo(formUsuario)" *ngIf="isEditing" label="Novo" pButton type="button"></button>
+        <button (click)="clear(formUsuario)" class="ui-button-info" label="Limpar" pButton
+                type="button"></button>
+        <a [routerLink]="'/usuarios'" href="javascript:">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+</div>

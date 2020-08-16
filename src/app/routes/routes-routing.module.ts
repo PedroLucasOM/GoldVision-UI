@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: './categorias/categorias.module#CategoriasModule'
   },
   {
+    path: 'usuarios',
+    loadChildren: './usuarios/usuarios.module#UsuariosModule'
+  },
+  {
     path: '**',
     redirectTo: 'lancamentos',
     pathMatch: 'full'

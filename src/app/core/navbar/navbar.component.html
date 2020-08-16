@@ -19,10 +19,7 @@
       <a [routerLink]="['/categorias']" href="javascript:">Categorias</a>
     </li>
     <li *ngIf="auth.hasAuthority('LISTAR_USUARIO')" class="navbar-menuitem">
-      <a href="javascript:">Usuários</a>
-    </li>
-    <li *ngIf="auth.hasAuthority('LISTAR_PERMISSAO')" class="navbar-menuitem">
-      <a href="javascript:">Permissões</a>
+      <a [routerLink]="['/usuarios']" href="javascript:">Usuários</a>
     </li>
     <li class="navbar-menuitem">
       <a (click)="auth.logout()" href="javascript:">Logout</a>

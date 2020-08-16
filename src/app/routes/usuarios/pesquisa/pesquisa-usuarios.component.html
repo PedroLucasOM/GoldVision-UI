@@ -1,0 +1,53 @@
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Usuários</h1>
+    </div>
+    <div class="ui-g-12 ui-fluid">
+      <label for="nome">Nome</label>
+      <input [(ngModel)]="usuarioFilter.nome" id="nome" pInputText type="text">
+    </div>
+    <div class="ui-g-12">
+      <button (click)="filtrar()" label="Pesquisar" pButton></button>
+    </div>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table #table (onLazyLoad)="changePage($event)" [lazy]="true"
+               [paginator]="true" [responsive]="true" [rows]="usuarioFilter.itensPorPagina"
+               [totalRecords]="usuarioFilter.total"
+               [value]="usuarios">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th class="col-header-acoes"></th>
+          </tr>
+        </ng-template>
+        <ng-template *ngIf="!usuarios" pTemplate="emptymessage">
+          Nenhum usuário encontrado
+        </ng-template>
+        <ng-template let-usuario pTemplate="body">
+          <tr>
+            <td>{{usuario?.nome}}</td>
+            <td>{{usuario?.email}}</td>
+            <td class="col-body-acoes">
+              <button (click)="editar(usuario?.codigo)" [disabled]="!auth.hasAuthority('ATUALIZAR_USUARIO')"
+                      icon="pi pi-pencil" pButton
+                      pTooltip="Editar" tooltipPosition="top"></button>
+              <button (click)="confirmDelete(usuario)" [disabled]="!auth.hasAuthority('DELETAR_USUARIO')"
+                      icon="pi pi-trash" pButton
+                      pTooltip="Excluir"
+                      tooltipPosition="top"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="ui-g-12">
+      <button [disabled]="!auth.hasAuthority('SALVAR_USUARIO')" [routerLink]="'/usuarios/novo'" label="Novo Usuário"
+              pButton></button>
+    </div>
+  </div>
+</div>

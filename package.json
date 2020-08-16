@@ -26,6 +26,7 @@
     "chart.js": "^2.8.0",
     "font-awesome": "^4.7.0",
     "moment": "^2.26.0",
+    "ng-validate-equal": "^1.0.4",
     "ng2-currency-mask": "^5.3.1",
     "npm3": "^1.1.1",
     "primeicons": "^2.0.0",
