@@ -5,7 +5,7 @@ import {HandleErrorService} from '../../../core/services/handle-error.service';
 import {Pessoa, PessoaFilter} from '../../../core/models/Pessoa';
 import {PessoasService} from '../../pessoas/pessoas.service';
 import {LancamentosService} from '../lancamentos.service';
-import {NgForm} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Lancamento, LancamentoFilter} from '../../../core/models/Lancamento';
 import {HandleMessageService} from '../../../core/services/handle-message.service';
 import {LocationService} from '../../../core/services/location.service';
@@ -30,7 +30,7 @@ export class CadastroLancamentosComponent implements OnInit {
   categorias: Categoria[] = [];
   pessoas: Pessoa[] = [];
 
-  lancamento: Lancamento = new Lancamento();
+  formulario: FormGroup;
   codigoLancamento: number;
 
   constructor(
@@ -41,7 +41,8 @@ export class CadastroLancamentosComponent implements OnInit {
     private handleErrorService: HandleErrorService,
     private route: ActivatedRoute,
     private router: Router,
-    public locationService: LocationService
+    public locationService: LocationService,
+    private formBuilder: FormBuilder
   ) {
   }
 
@@ -50,6 +51,7 @@ export class CadastroLancamentosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.configurarFormulario();
     this.codigoLancamento = this.route.snapshot.params['codigo'];
 
     if (this.codigoLancamento) {
@@ -62,21 +64,51 @@ export class CadastroLancamentosComponent implements OnInit {
     this.listarCategorias();
   }
 
+  configurarFormulario() {
+    this.formulario = this.formBuilder.group({
+      codigo: [],
+      tipo: [ 'RECEITA', Validators.required ],
+      dataVencimento: [ null, Validators.required ],
+      dataPagamento: [],
+      descricao: [null, [ this.validarObrigatoriedade, this.validarTamanhoMinimo(5) ]],
+      valor: [ null, Validators.required ],
+      pessoa: this.formBuilder.group({
+        codigo: [ null, Validators.required ],
+        nome: []
+      }),
+      categoria: this.formBuilder.group({
+        codigo: [ null, Validators.required ],
+        nome: []
+      }),
+      observacao: []
+    });
+  }
+
+  validarObrigatoriedade(input: FormControl) {
+    return (input.value ? null : { obrigatoriedade: true });
+  }
+
+  validarTamanhoMinimo(valor: number) {
+    return (input: FormControl) => {
+      return (!input.value || input.value.length >= valor) ? null : { tamanhoMinimo: { tamanho: valor } };
+    };
+  }
+
   buscarPorCodigo() {
     this.lancamentoService.buscarPorCodigo(this.codigoLancamento)
       .then(response => {
-        this.lancamento = response;
+        this.formulario.patchValue(response);
       })
       .catch(error => {
         this.handleErrorService.handle(error);
       });
   }
 
-  cadastrar(form: NgForm) {
-    this.lancamentoService.cadastrar(this.lancamento)
+  cadastrar() {
+    this.lancamentoService.cadastrar(this.formulario.value)
       .then(() => {
         this.handleMessageService.onShowSuccess('Lançamento cadastrado com sucesso!');
-        this.clear(form);
+        this.clear();
       })
       .catch(error => {
         this.handleErrorService.handle(error);
@@ -84,7 +116,7 @@ export class CadastroLancamentosComponent implements OnInit {
   }
 
   atualizar() {
-    this.lancamentoService.atualizar(this.codigoLancamento, this.lancamento)
+    this.lancamentoService.atualizar(this.codigoLancamento, this.formulario.value)
       .then(() => {
         this.handleMessageService.onShowSuccess('Lançamento atualizado com sucesso!');
       })
@@ -93,11 +125,11 @@ export class CadastroLancamentosComponent implements OnInit {
       });
   }
 
-  salvar(form: NgForm) {
+  salvar() {
     if (this.codigoLancamento) {
       this.atualizar();
     } else {
-      this.cadastrar(form);
+      this.cadastrar();
     }
   }
 
@@ -173,20 +205,18 @@ export class CadastroLancamentosComponent implements OnInit {
     this.pessoaFilter.nome = nome;
   }
 
-  clear(form: NgForm) {
-    form.reset();
-
+  clear() {
     setTimeout(function() {
-      this.lancamento = new Lancamento();
-      this.lancamento.codigo = this.codigoLancamento;
+      this.formulario.reset();
+      this.formulario.get('codigo').setValue(this.codigoLancamento);
       this.lancamentoFilter = new LancamentoFilter();
       this.configurarCategoriaFilter();
       this.configurarPessoaFilter();
     }.bind(this), 1);
   }
 
-  novo(form: NgForm) {
-    this.clear(form);
+  novo() {
+    this.clear();
     this.router.navigate(['/lancamentos/novo']);
   }
 }

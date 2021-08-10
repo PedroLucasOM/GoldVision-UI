@@ -1,75 +1,69 @@
 <div class="container">
-  <form #formLancamento="ngForm" (ngSubmit)="salvar(formLancamento)" autocomplete="off">
+  <form (ngSubmit)="salvar()" autocomplete="off" [formGroup]="formulario">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>{{isEditing ? "Editar Lançamento" : "Novo Lançamento"}}</h1>
       </div>
       <div class="ui-g-12">
-        <p-selectButton #tipo="ngModel" [(ngModel)]="lancamento.tipo" [options]="tipos" name="tipo"
-                        required></p-selectButton>
-        <app-mensagem-erro [control]="tipo" error="required" text="O tipo é obrigatório"></app-mensagem-erro>
+        <p-selectButton [options]="tipos"
+                       formControlName="tipo"></p-selectButton>
+        <app-mensagem-erro [control]="formulario.get('tipo')" error="required" text="O tipo é obrigatório"></app-mensagem-erro>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
-        <label for="vencimento">Vencimento</label>
-        <p-calendar #dataVencimento="ngModel" [(ngModel)]="lancamento.dataVencimento" [locale]="locationService.pt"
-                    dateFormat="dd/mm/yy"
-                    id="vencimento" name="dataVencimento" required></p-calendar>
-        <app-mensagem-erro [control]="dataVencimento" error="required"
+        <label>Vencimento</label>
+        <p-calendar [locale]="locationService.pt"
+                    dateFormat="dd/mm/yy" formControlName="dataVencimento"></p-calendar>
+        <app-mensagem-erro [control]="formulario.get('dataVencimento')" error="required"
                            text="A data de vencimento é obrigatória"></app-mensagem-erro>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
-        <label for="recebimento_pagamento">Recebimento</label>
-        <p-calendar #dataPagamento="ngModel" [(ngModel)]="lancamento.dataPagamento" [locale]="locationService.pt"
-                    dateFormat="dd/mm/yy" id="recebimento_pagamento"
-                    name="dataPagamento"></p-calendar>
+        <label>Recebimento</label>
+        <p-calendar [locale]="locationService.pt"
+                    dateFormat="dd/mm/yy" formControlName="dataPagamento"></p-calendar>
       </div>
       <div class="ui-g-12 ui-md-9 ui-fluid">
-        <label for="descricao">Descrição</label>
-        <input #descricao="ngModel" [(ngModel)]="lancamento.descricao" id="descricao" maxlength="30" name="descricao"
-               pInputText required type="text">
-        <app-mensagem-erro [control]="descricao" error="required"
+        <label>Descrição</label>
+        <input pInputText type="text" formControlName="descricao">
+        <app-mensagem-erro [control]="formulario.get('descricao')" error="required"
                            text="A descrição é obrigatória"></app-mensagem-erro>
       </div>
       <div class="ui-g-12 ui-md-3 ui-fluid">
-        <label for="valor">Valor</label>
-        <input #valor="ngModel" [(ngModel)]="lancamento.valor"
-               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" currencyMask
-               id="valor"
-               name="valor" pInputText required type="text">
-        <app-mensagem-erro [control]="valor" error="required"
+        <label>Valor</label>
+        <input [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" currencyMask
+               pInputText type="text" formControlName="valor">
+        <app-mensagem-erro [control]="formulario.get('valor')" error="required"
                            text="O valor é obrigatório"></app-mensagem-erro>
       </div>
-      <div class="ui-g-12 ui-md-6 ui-fluid">
-        <label for="categoria">Categoria</label>
-        <ng-select #categoria="ngModel" (clear)="onCategoriaClear()" (scrollToEnd)="onCategoriaScrollEnded()"
-                   (search)="onCategoriaSearch($event)" [(ngModel)]="lancamento.categoria.codigo"
+      <div class="ui-g-12 ui-md-6 ui-fluid" formGroupName="categoria">
+        <label>Categoria</label>
+        <ng-select (clear)="onCategoriaClear()" (scrollToEnd)="onCategoriaScrollEnded()"
+                   (search)="onCategoriaSearch($event)"
                    [clearable]="true" [items]="categorias" [searchable]="true" [virtualScroll]="true"
                    bindLabel="nome" bindValue="codigo" clearAllText="Limpar"
-                   id="categoria" name="categoria" notFoundText="Nenhuma categoria encontrada"
-                   placeholder="Selecione" required></ng-select>
-        <app-mensagem-erro [control]="categoria" error="required"
+                   notFoundText="Nenhuma categoria encontrada"
+                   placeholder="Selecione" formControlName="codigo"></ng-select>
+        <app-mensagem-erro [control]="formulario.get('codigo')" error="required"
                            text="A categoria é obrigatória"></app-mensagem-erro>
       </div>
-      <div class="ui-g-12 ui-md-6 ui-fluid">
-        <label for="categoria">Pessoa</label>
-        <ng-select #pessoa="ngModel" (clear)="onPessoaClear()" (scrollToEnd)="onPessoaScrollEnded()"
-                   (search)="onPessoaSearch($event)" [(ngModel)]="lancamento.pessoa.codigo"
+      <div class="ui-g-12 ui-md-6 ui-fluid" formGroupName="pessoa">
+        <label>Pessoa</label>
+        <ng-select (clear)="onPessoaClear()" (scrollToEnd)="onPessoaScrollEnded()"
+                   (search)="onPessoaSearch($event)"
                    [clearable]="true" [items]="pessoas" [searchable]="true" [virtualScroll]="true"
                    bindLabel="nome" bindValue="codigo" clearAllText="Limpar" id="pessoa"
-                   name="pessoa" notFoundText="Nenhuma pessoa encontrada"
-                   placeholder="Selecione" required></ng-select>
-        <app-mensagem-erro [control]="pessoa" error="required"
+                   notFoundText="Nenhuma pessoa encontrada"
+                   placeholder="Selecione" formControlName="codigo"></ng-select>
+        <app-mensagem-erro [control]="formulario.get('codigo')" error="required"
                            text="A pessoa é obrigatória"></app-mensagem-erro>
       </div>
       <div class="ui-g-12 ui-fluid">
-        <label for="observacao">Observação</label>
-        <textarea #observacao="ngModel" [(ngModel)]="lancamento.observacao" id="observacao" maxlength="100"
-                  name="observacao" pInputTextarea rows="3"></textarea>
+        <label>Observação</label>
+        <textarea pInputTextarea rows="3" formControlName="observacao"></textarea>
       </div>
       <div class="ui-g-12">
-        <button [disabled]="formLancamento.invalid" label="Salvar" pButton type="submit"></button>
-        <button (click)="novo(formLancamento)" *ngIf="isEditing" label="Novo" pButton type="button"></button>
-        <button (click)="clear(formLancamento)" class="ui-button-info" label="Limpar" pButton type="button"></button>
+        <button [disabled]="formulario.invalid" label="Salvar" pButton type="submit"></button>
+        <button (click)="novo()" *ngIf="isEditing" label="Novo" pButton type="button"></button>
+        <button (click)="clear()" class="ui-button-info" label="Limpar" pButton type="button"></button>
         <a [routerLink]="'/lancamentos'" href="javascript:">Voltar para a pesquisa</a>
       </div>
     </div>

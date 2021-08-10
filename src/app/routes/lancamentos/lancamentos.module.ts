@@ -4,7 +4,7 @@ import {CadastroLancamentosComponent} from './cadastro/cadastro-lancamentos.comp
 import {PesquisaLancamentosComponent} from './pesquisa/pesquisa-lancamentos.component';
 import {LancamentosRoutingModule} from './lancamentos-routing.module';
 import {SharedModule} from '../../shared/shared.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ComponentesModule} from '../../core/componentes/componentes.module';
 import {LancamentosService} from './lancamentos.service';
 
@@ -15,7 +15,8 @@ import {LancamentosService} from './lancamentos.service';
     FormsModule,
     LancamentosRoutingModule,
     SharedModule,
-    ComponentesModule
+    ComponentesModule,
+    ReactiveFormsModule
   ],
   providers: [LancamentosService]
 })

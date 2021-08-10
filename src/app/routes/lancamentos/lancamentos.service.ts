@@ -34,7 +34,7 @@ export class LancamentosService {
       params = params.set('dataVencimentoAte', lancamentoFilter.dataVencimentoAte);
     }
 
-    return this.http.get<any[]>(`${LancamentosService.lancamentosUrl}?resumir`, {params}).toPromise();
+    return this.http.get<any[]>(`${LancamentosService.lancamentosUrl}/resumir`, {params}).toPromise();
   }
 
   buscarPorCodigo(codigo: number): Promise<Lancamento> {
