@@ -5,12 +5,12 @@ import {InputTextModule} from 'primeng/inputtext';
 import {TableModule} from 'primeng/table';
 import {PickListModule} from 'primeng/picklist';
 import {
-  CalendarModule,
+  CalendarModule, ChartModule,
   ConfirmationService,
   ConfirmDialogModule,
   DropdownModule,
   InputMaskModule,
-  InputTextareaModule,
+  InputTextareaModule, PanelModule,
   SelectButtonModule,
   TooltipModule,
 } from 'primeng/primeng';
@@ -34,7 +34,9 @@ import {ToastModule} from 'primeng/toast';
     InputMaskModule,
     ToastModule,
     ConfirmDialogModule,
-    PickListModule
+    PickListModule,
+    PanelModule,
+    ChartModule,
   ],
   exports: [
     ButtonModule,
@@ -50,7 +52,9 @@ import {ToastModule} from 'primeng/toast';
     InputMaskModule,
     ToastModule,
     ConfirmDialogModule,
-    PickListModule
+    PickListModule,
+    PanelModule,
+    ChartModule,
   ],
   providers: [ConfirmationService]
 })

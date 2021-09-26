@@ -17,7 +17,7 @@
                            text="A data de vencimento é obrigatória"></app-mensagem-erro>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
-        <label>Recebimento</label>
+        <label>{{ formulario.get('tipo').value == 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
         <p-calendar [locale]="locationService.pt"
                     dateFormat="dd/mm/yy" formControlName="dataPagamento"></p-calendar>
       </div>

@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DecimalPipe} from '@angular/common';
 import {NavbarComponent} from './navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import {ComponentesModule} from './componentes/componentes.module';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthService} from '../security/auth.service';
-import {HandleMessageService} from '../core/services/handle-message.service';
+import {HandleMessageService} from './services/handle-message.service';
 import {SharedModule} from '../shared/shared.module';
 import {HandleErrorService} from './services/handle-error.service';
 import {AuthGuard} from '../security/auth.guard';
@@ -42,7 +42,8 @@ import {DiretivasModule} from './diretivas/diretivas.module';
     NavbarService,
     LocationService,
     UtilService,
-    CustomValidationService
+    CustomValidationService,
+    DecimalPipe
   ]
 })
 export class CoreModule {

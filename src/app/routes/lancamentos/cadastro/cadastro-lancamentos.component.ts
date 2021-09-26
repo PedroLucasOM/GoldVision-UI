@@ -209,6 +209,7 @@ export class CadastroLancamentosComponent implements OnInit {
     setTimeout(function() {
       this.formulario.reset();
       this.formulario.get('codigo').setValue(this.codigoLancamento);
+      this.formulario.get('tipo').setValue('RECEITA');
       this.lancamentoFilter = new LancamentoFilter();
       this.configurarCategoriaFilter();
       this.configurarPessoaFilter();
