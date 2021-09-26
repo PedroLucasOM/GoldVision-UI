@@ -8,6 +8,10 @@ const routes: Routes = [
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
   {
+    path: 'relatorios',
+    loadChildren: './relatorios/relatorios.module#RelatoriosModule'
+  },
+  {
     path: 'lancamentos',
     loadChildren: './lancamentos/lancamentos.module#LancamentosModule'
   },
