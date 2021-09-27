@@ -14,7 +14,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class CadastroPessoasComponent implements OnInit {
 
   pessoa: Pessoa = new Pessoa();
-
   codigoPessoa: number;
 
   constructor(
@@ -79,7 +78,7 @@ export class CadastroPessoasComponent implements OnInit {
   clear(form: NgForm) {
     form.reset();
 
-    setTimeout(function() {
+    setTimeout(function () {
       this.pessoa = new Pessoa();
       this.codigoPessoa = null;
     }.bind(this), 1);

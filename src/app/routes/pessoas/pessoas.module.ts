@@ -7,10 +7,11 @@ import {SharedModule} from '../../shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import {ComponentesModule} from '../../core/componentes/componentes.module';
 import {PessoasService} from './pessoas.service';
+import { CadastroContatoComponent } from './cadastro-contato/cadastro-contato.component';
 
 
 @NgModule({
-  declarations: [CadastroPessoasComponent, PesquisaPessoasComponent],
+  declarations: [CadastroPessoasComponent, PesquisaPessoasComponent, CadastroContatoComponent],
   imports: [
     CommonModule,
     FormsModule,

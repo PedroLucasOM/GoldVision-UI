@@ -7,7 +7,7 @@ import {PickListModule} from 'primeng/picklist';
 import {
   CalendarModule, ChartModule,
   ConfirmationService,
-  ConfirmDialogModule,
+  ConfirmDialogModule, DialogModule,
   DropdownModule,
   InputMaskModule,
   InputTextareaModule, PanelModule,
@@ -37,6 +37,7 @@ import {ToastModule} from 'primeng/toast';
     PickListModule,
     PanelModule,
     ChartModule,
+    DialogModule
   ],
   exports: [
     ButtonModule,
@@ -55,6 +56,7 @@ import {ToastModule} from 'primeng/toast';
     PickListModule,
     PanelModule,
     ChartModule,
+    DialogModule
   ],
   providers: [ConfirmationService]
 })

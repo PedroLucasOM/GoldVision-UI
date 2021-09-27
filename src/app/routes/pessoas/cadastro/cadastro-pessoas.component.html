@@ -45,6 +45,13 @@
         <label for="estado">Estado</label>
         <input #estado="ngModel" [(ngModel)]="pessoa.endereco.estado" id="estado" name="estado" pInputText type="text">
       </div>
+
+      <div class="ui-g-12">
+        <p-panel header="Contatos">
+          <app-pessoa-cadastro-contato [contatos]="pessoa.contatos"></app-pessoa-cadastro-contato>
+        </p-panel>
+      </div>
+
       <div class="ui-g-12">
         <button [disabled]="formPessoa.invalid" label="Salvar" pButton type="submit"></button>
         <button (click)="novo(formPessoa)" *ngIf="isEditing" label="Nova" pButton type="button"></button>
