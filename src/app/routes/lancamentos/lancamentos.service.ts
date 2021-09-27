@@ -16,6 +16,10 @@ export class LancamentosService {
     private utilService: UtilService) {
   }
 
+  urlUploadAnexo(): string {
+    return `${LancamentosService.lancamentosUrl}/anexo`;
+  }
+
   resumir(lancamentoFilter: LancamentoFilter): Promise<any[]> {
     let params = new HttpParams();
 
@@ -57,8 +61,10 @@ export class LancamentosService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
 
-    lancamento.dataVencimento = this.utilService.onFormatDate(lancamento.dataVencimento);
-    if (lancamento.dataPagamento) {
+    if (lancamento.dataVencimento as any instanceof Date) {
+      lancamento.dataVencimento = this.utilService.onFormatDate(lancamento.dataVencimento);
+    }
+    if (lancamento.dataPagamento && (lancamento.dataPagamento as any instanceof Date)) {
       lancamento.dataPagamento = this.utilService.onFormatDate(lancamento.dataPagamento);
     }
 

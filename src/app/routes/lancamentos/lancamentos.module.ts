@@ -7,6 +7,8 @@ import {SharedModule} from '../../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ComponentesModule} from '../../core/componentes/componentes.module';
 import {LancamentosService} from './lancamentos.service';
+import {FileUploadModule} from "primeng/fileupload";
+import {ProgressSpinnerModule} from "primeng/primeng";
 
 @NgModule({
   declarations: [CadastroLancamentosComponent, PesquisaLancamentosComponent],
@@ -16,7 +18,9 @@ import {LancamentosService} from './lancamentos.service';
     LancamentosRoutingModule,
     SharedModule,
     ComponentesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FileUploadModule,
+    ProgressSpinnerModule
   ],
   providers: [LancamentosService]
 })

@@ -16,6 +16,8 @@ export class Lancamento {
   public tipo: TipoLancamento = TipoLancamento.Receita;
   public categoria: Categoria = new Categoria();
   public pessoa: Pessoa = new Pessoa();
+  public anexo: string;
+  public urlAnexo: string;
 }
 
 export class LancamentoFilter {

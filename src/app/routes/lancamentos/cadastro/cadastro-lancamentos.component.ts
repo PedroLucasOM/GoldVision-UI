@@ -33,6 +33,8 @@ export class CadastroLancamentosComponent implements OnInit {
   formulario: FormGroup;
   codigoLancamento: number;
 
+  uploadEmAndamento = false;
+
   constructor(
     private categoriaService: CategoriasService,
     private pessoaService: PessoasService,
@@ -42,7 +44,8 @@ export class CadastroLancamentosComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public locationService: LocationService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private handleMessage: HandleMessageService
   ) {
   }
 
@@ -64,6 +67,48 @@ export class CadastroLancamentosComponent implements OnInit {
     this.listarCategorias();
   }
 
+  removerAnexo() {
+    this.formulario.patchValue({
+      anexo: null,
+      urlAnexo: null
+    });
+  }
+
+  antesUploadAnexo() {
+    this.uploadEmAndamento = true;
+  }
+
+  aoTerminarUploadAnexo(event) {
+    const anexo = event.originalEvent.body;
+
+    this.formulario.patchValue({
+      anexo: anexo.nome,
+      urlAnexo: anexo.url
+    });
+
+    this.uploadEmAndamento = false;
+  }
+
+  get nomeAnexo() {
+    const nome = this.formulario.get('anexo').value;
+
+    if (nome) {
+      return nome.substring(nome.indexOf('_') + 1, nome.length);
+    }
+
+    return '';
+  }
+
+  get urlUploadAnexo() {
+    return this.lancamentoService.urlUploadAnexo();
+  }
+
+  erroUpload(event) {
+    this.handleMessage.onShowError('Erro ao tentar enviar anexo!');
+    console.log(event);
+    this.uploadEmAndamento = false;
+  }
+
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
       codigo: [],
@@ -80,7 +125,9 @@ export class CadastroLancamentosComponent implements OnInit {
         codigo: [ null, Validators.required ],
         nome: []
       }),
-      observacao: []
+      observacao: [],
+      anexo: [],
+      urlAnexo: []
     });
   }
 
