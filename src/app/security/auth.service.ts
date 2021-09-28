@@ -31,7 +31,7 @@ export class AuthService {
     return this.http.post(AuthService.url, body, {headers, withCredentials: true}).toPromise()
       .then(response => {
         this.storeToken(response['access_token']);
-        this.router.navigate(['/lancamentos']);
+        this.router.navigate(['/dashboard']);
       }).catch(response => {
         this.handleError.handle(response);
         return Promise.reject(response);
