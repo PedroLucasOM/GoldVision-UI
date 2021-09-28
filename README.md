@@ -20,7 +20,7 @@
   </a>
 </p>
 
-> :computer: Componentized Angular Frontend Application to consume [GoldVisionAPI](https://github.com/PedroLucasOM/GoldVision-API) with secured requests using REST Architecture and SOAP Model  :bar_chart:.
+> :computer: Componentized Angular Frontend Application to consume the [GoldVisionAPI](https://github.com/PedroLucasOM/GoldVision-API) with secured requests using REST Architecture and SOAP Model  :bar_chart:.
 
 <br/>
 
