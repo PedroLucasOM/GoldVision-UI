@@ -30,14 +30,20 @@
 
 # Install
 
-You need to run the [GoldVisionAPI](https://github.com/PedroLucasOM/GoldVision-API) at the port 8080 of your localhost.
+First of all, you need to run the [GoldVisionAPI](https://github.com/PedroLucasOM/GoldVision-API) at the port 8080 of your localhost.
+
+After that, you need to run this command in the root path of the project:
+
+```sh
+docker build -t goldvision-ui-image:latest .
+```
 
 # Run
 
 With the docker started, execute this command at the project root:
 
 ```sh
-docker-compose up -d --build
+docker run -d -p 4200:80 goldvision-ui-image:latest
 ```
 
 # Screenshots
