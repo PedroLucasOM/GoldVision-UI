@@ -116,7 +116,14 @@ docker run -d -p 4200:80 goldvision-ui-image:latest
 
 # Usage
 
-Go to http://localhost:4200
+Go to http://localhost:4200.
+
+Login with the following credentials:
+
+**User:** admin@gmail.com
+**Password:** admin
+
+Use the system following the [Screenshots](https://github.com/PedroLucasOM/GoldVision-UI#screenshots) above.
 
 # Author
 
