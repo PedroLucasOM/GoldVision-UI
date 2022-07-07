@@ -25,7 +25,7 @@
     "@ng-select/ng-select": "^3.7.3",
     "chart.js": "^2.8.0",
     "font-awesome": "^4.7.0",
-    "moment": "^2.26.0",
+    "moment": "^2.29.4",
     "ng-validate-equal": "^1.0.4",
     "ng2-currency-mask": "^5.3.1",
     "npm3": "^1.1.1",
